@@ -1,17 +1,19 @@
+"use strict";
+
 // Task 1
 
-// const var1 = 'true';
-// const var2 = false;
-// const var3 = 17;
-// const var4 = undefined;
-// const var5 = null;
+const var1 = 'true';
+const var2 = false;
+const var3 = 17;
+const var4 = undefined;
+const var5 = null;
 
-// console.log(typeof var1, typeof var2, typeof var3, typeof var4, typeof var5);
+console.log(typeof var1, typeof var2, typeof var3, typeof var4, typeof var5);
 
 
 // Task 2
 
-// const height = 22;
+// const height = 15;
 // const width = 20;
 
 // if (height > width) {
@@ -115,11 +117,11 @@
 
 // Task 10
 
-const grid = '#';
+// const grid = '#';
 
-for (let i = 1; i < 7; ++i) {
-    console.log(grid.repeat(i))
-}
+// for (let i = 1; i < 7; ++i) {
+//     console.log(grid.repeat(i))
+// }
  
       
          
