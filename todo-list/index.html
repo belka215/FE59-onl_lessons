@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <section class="todo">
+        <div class="todo__wrapper">
+            <div class="action">
+                <!-- <button class="action__delete-all-btn btn">Delete All</button> -->
+                <button class="action__delete-last-btn btn">Delete Last</button>
+                <input class="action__enter-field field" placeholder="Enter todo ..." type="text">
+                <button class="action__add-btn btn">Add</button>
+            </div>
+            <div class="search">
+                <p class="search__all">All:<span class="search__all__value">2</span></p>
+                <p class="search__compl">Completed:<span class="search__compl__value">1</span></p>
+                <button class="search__show-all-btn btn">Show All</button>
+                <button class="search__show-compl-btn btn">Show Completed</button>
+                <input class="search__search-field field" placeholder="Search ..." type="text">
+            </div>
+            <ul class="todo-list">
+                <li class="todo-list__item checked">
+                    <input type="checkbox" id="chb1" name="chb1" class="checkbox" checked>
+                    <label for="chb1" class="checkbox-content">
+                        <p class="checkbox-content__text">Todo Text</p>
+                        <div class="checkbox-content__right">
+                            <button class="exit-btn btn">X</button>
+                            <p class="date">Date</p>
+                        </div>
+                    </label>
+                </li>
+                <li class="todo-list__item">
+                    <input type="checkbox" id="chb1" name="chb1" class="checkbox">
+                    <label for="chb1" class="checkbox-content">
+                        <p class="checkbox-content__text">Todo Text</p>
+                        <div class="checkbox-content__right">
+                            <button class="exit-btn btn">X</button>
+                            <p class="date">Date</p>
+                        </div>
+                    </label>
+                </li>
+            </ul>
+        </div>
+    </section>
+    <script src="index.js"></script>
+</body>
+
+</html>
