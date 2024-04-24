@@ -10,6 +10,9 @@ action.prepend(deleteAllBtn);
 
 const addBtn = document.querySelector('.action__add-btn');
 const ul = document.querySelector('.todo-list');
+const deleteLastBtn = document.querySelector('.action__delete-last-btn');
+
+const date = new Date().toISOString().slice(0,10).split('-').reverse().join('.');
 
 addBtn.addEventListener("click", () => {
     const enterField = document.querySelector('.action__enter-field');
@@ -35,9 +38,26 @@ addBtn.addEventListener("click", () => {
 })
 
 
+ul.addEventListener('click', (event) => {
+    if (event.target.classList.contains('exit-btn')) {
+        deleteTodo(event);
+    }
+    if (event.target.classList.contains('checkbox')) {
+        checked(event);
+    }
+});
+
+
 deleteAllBtn.addEventListener('click', () => {
     while (ul.firstChild) {
         ul.removeChild(ul.firstChild);
+    }
+})
+
+
+deleteLastBtn.addEventListener('click', () => {
+    if (ul.lastElementChild) {
+        ul.removeChild(ul.lastElementChild);
     }
 })
 
@@ -47,34 +67,13 @@ function deleteTodo(event) {
     ul.removeChild(currentLi);
 }
 
-ul.addEventListener('click', (event) => {
-    if (event.target.classList.contains('exit-btn')) {
-        deleteTodo(event);
-    }
-});
-
 
 function checked(event) {
     const currentLi = event.target.parentElement;
     const currentText = event.target.nextElementSibling.firstElementChild;
-    currentLi.classList.add('checked');
-    currentText.classList.add('text_checked');
+    currentLi.classList.toggle('checked');
+    currentText.classList.toggle('text_checked');
 }
 
-ul.addEventListener('click', (event) => {
-    if (event.target.classList.contains('checkbox')) {
-        checked(event);
-    }
-})
-
-
-const date = new Date().toISOString().slice(0,10).split('-').reverse().join('.');
-
-
-const deleteLastBtn = document.querySelector('.action__delete-last-btn')
-
-deleteLastBtn.addEventListener('click', () => {
-    ul.removeChild(ul.lastElementChild);
-})
 
 
