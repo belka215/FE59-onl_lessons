@@ -1,4 +1,16 @@
-"use strict";
+import {
+    getData,
+    setData,
+    getDataFromLS,
+    setTodoToLS,
+    createTodo,
+    deleteTodo,
+    checked,
+    lsChecked,
+    search,
+    showComplTodo
+} from "./scripts/functions.js";
+
 
 const action = document.querySelector('.action');
 const deleteAllBtn = document.createElement('button');
@@ -12,62 +24,35 @@ const addBtn = document.querySelector('.action__add-btn');
 const enterField = document.querySelector('.action__enter-field');
 const ul = document.querySelector('.todo-list');
 const deleteLastBtn = document.querySelector('.action__delete-last-btn');
+const searchField = document.querySelector('.search__search-field');
+const allTodo = document.querySelector('.search__all__value');
+const showComplBtn = document.querySelector('.search__show-compl-btn');
+const showAllBtn = document.querySelector('.search__show-all-btn');
 
-const date = new Date().toISOString().slice(0,10).split('-').reverse().join('.');
+const date = new Date().toISOString().slice(0, 10).split('-').reverse().join('.');
 
 const todoList = getData();
+
+let todoCount = 0;
 let uId;
 
 if (todoList) {
-    uId = todoList.length + 1;
+    const lastLiinLS = todoList[todoList.length - 1];
+    const id = Number(lastLiinLS.id.split('-').at(-1));
+    uId = id + 1;
 } else {
     uId = 1;
 }
 
-function getData() {
-    const data = localStorage.getItem('todos');
-    return JSON.parse(data);
-}
-
-function setData(todos) {
-    localStorage.setItem("todos", JSON.stringify(todos));
-}
+getDataFromLS(todoList);
 
 addBtn.addEventListener("click", () => {
-    const inputText = enterField.value;
+    const text = enterField.value;
+    const id = `todo-item-${uId}`;
 
-    if (inputText) {
-        const todoItem = document.createElement('li');
-        todoItem.classList.add('todo-list__item');
-        todoItem.id = `todo-item-${uId}`;
-
-        todoItem.innerHTML = `
-        <input type="checkbox" id="checkbox-${uId}" name="chb1" class="checkbox">
-        <label for="chb1" class="checkbox-content">
-            <p class="checkbox-content__text" id="text-${uId}">${inputText}</p>
-            <div class="checkbox-content__right">
-                <button class="exit-btn btn" id="exit-btn-${uId}">X</button>
-                <p class="date">${date}</p>
-            </div>
-        </label>`
-
-        const todo = {
-            id: `todo-item-${uId}`,
-            text: inputText,
-            date,
-            isChecked: false,
-        }
-
-        const data = localStorage.getItem('todos');
-        if (!data) {
-            localStorage.setItem('todos', JSON.stringify([todo]));
-        } else {
-            const result = JSON.parse(data);
-            result.push(todo);
-            localStorage.setItem('todos', JSON.stringify(result));
-        }
-
-        ul.append(todoItem);
+    if (text) {
+        createTodo({ id, date, text, isChecked: false }, uId);
+        setTodoToLS({ id, date, text, isChecked: false }, uId);
 
         ++uId;
 
@@ -89,6 +74,8 @@ deleteAllBtn.addEventListener('click', () => {
     ul.innerHTML = '';
 
     localStorage.clear();
+
+    allTodo.textContent = 0;
 })
 
 deleteLastBtn.addEventListener('click', () => {
@@ -98,81 +85,26 @@ deleteLastBtn.addEventListener('click', () => {
         const todos = getData();
         todos.pop();
         setData(todos);
+
+        --todoCount;
+        allTodo.textContent = todoCount;
     }
 })
 
-function deleteTodo(event) {
-    const id = event.target.id;
-    console.log(id);
-    const liId = `todo-item-${id.split('-').at(-1)}`;
-    console.log(liId);
-    const currentLi = ul.querySelector(`#${liId}`);
-    console.log(currentLi)
-    ul.removeChild(currentLi);
+searchField.addEventListener('input', (event) => {
+    search(event);
+})
 
-    const todos = getData();
-    console.log(todos);
-    console.log(todos.findIndex(todo => todo.id == liId));
-    todos.splice(todos.findIndex(todo => todo.id == liId), 1)
-    setData(todos);
-    console.log(todos)
-}
+showAllBtn.addEventListener('click', () => {
+    searchField.value = '';
+    ul.innerHTML = "";
+    const data = getData()
+    getDataFromLS(data);
+})
 
-function checked(event) {
-    const id = event.target.id;
-    const liId = `todo-item-${id.split('-').at(-1)}`;
-    const textId = `text-${id.split('-').at(-1)}`;
-    const currentLi = ul.querySelector(`#${liId}`);
-    const currentText = ul.querySelector(`#${textId}`);
-
-    currentLi.classList.toggle('checked');
-    currentText.classList.toggle('text_checked');
-}
-
-function lsChecked() {
-    const id = event.target.id;
-    const chId = `checkbox-${id.split('-').at(-1)}`;
-    const checkbox = ul.querySelector(`#${chId}`);
-    if (checkbox.checked) {
-        const todos = getData();
-        const currentTodo = todos[todos.findIndex(todo => todo.id == `todo-item-${id.split('-').at(-1)}`)];
-        currentTodo.isChecked = true;
-        setData(todos);
-    } else {
-        const todos = getData();
-        const currentTodo = todos[todos.findIndex(todo => todo.id == `todo-item-${id.split('-').at(-1)}`)];
-        currentTodo.isChecked = false;
-        setData(todos);
-    }
-}
-
-if (todoList) {
-    todoList.forEach(item => {
-        const todoItem = document.createElement('li');
-        todoItem.classList.add('todo-list__item');
-        todoItem.id = item.id;
-        const date = item.date;
-        const isChecked = item.isChecked;
-
-        todoItem.innerHTML = `
-        <input type="checkbox" id="checkbox-${uId}" name="chb1" class="checkbox" ${isChecked ? "checked" : ""}>
-        <label for="chb1" class="checkbox-content">
-            <p class="checkbox-content__text" id="text-${uId}">${item.text}</p>
-            <div class="checkbox-content__right">
-                <button class="exit-btn btn" id="exit-btn-${uId}">X</button>
-                <p class="date">${date}</p>
-            </div>
-        </label>`;
-
-        if(isChecked) {
-            todoItem.classList.add('checked');
-            const todoText = todoItem.lastElementChild.firstElementChild;
-            todoText.classList.add('text_checked');
-        }
-
-        ul.append(todoItem);
-    });
-}
+showComplBtn.addEventListener('click', () => {
+    showComplTodo()
+})
 
 
 
