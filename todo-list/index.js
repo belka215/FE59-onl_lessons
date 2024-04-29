@@ -8,7 +8,7 @@ import {
     checked,
     lsChecked,
     search,
-    showComplTodo
+    showComplTodo,
 } from "./scripts/functions.js";
 
 
@@ -28,13 +28,12 @@ const searchField = document.querySelector('.search__search-field');
 const allTodo = document.querySelector('.search__all__value');
 const showComplBtn = document.querySelector('.search__show-compl-btn');
 const showAllBtn = document.querySelector('.search__show-all-btn');
-
 const date = new Date().toISOString().slice(0, 10).split('-').reverse().join('.');
 
 const todoList = getData();
 
-let todoCount = 0;
 let uId;
+let todoCount = 0;
 
 if (todoList) {
     const lastLiinLS = todoList[todoList.length - 1];
@@ -44,15 +43,15 @@ if (todoList) {
     uId = 1;
 }
 
-getDataFromLS(todoList);
+getDataFromLS(todoList, ul);
 
 addBtn.addEventListener("click", () => {
     const text = enterField.value;
     const id = `todo-item-${uId}`;
 
     if (text) {
-        createTodo({ id, date, text, isChecked: false }, uId);
-        setTodoToLS({ id, date, text, isChecked: false }, uId);
+        createTodo({ id, date, text, isChecked: false }, uId, ul, allTodo, todoCount);
+        setTodoToLS({ id, date, text, isChecked: false }, uId, ul);
 
         ++uId;
 
@@ -62,11 +61,11 @@ addBtn.addEventListener("click", () => {
 
 ul.addEventListener('click', (event) => {
     if (event.target.classList.contains('exit-btn')) {
-        deleteTodo(event);
+        deleteTodo(event, ul, allTodo, todoCount, allTodo);
     }
     if (event.target.classList.contains('checkbox')) {
-        checked(event);
-        lsChecked(event);
+        checked(event, ul, allTodo, todoCount);
+        lsChecked(event, ul, allTodo, todoCount);
     }
 });
 
@@ -92,18 +91,18 @@ deleteLastBtn.addEventListener('click', () => {
 })
 
 searchField.addEventListener('input', (event) => {
-    search(event);
+    search(event, ul);
 })
 
 showAllBtn.addEventListener('click', () => {
     searchField.value = '';
     ul.innerHTML = "";
     const data = getData()
-    getDataFromLS(data);
+    getDataFromLS(data, ul);
 })
 
 showComplBtn.addEventListener('click', () => {
-    showComplTodo()
+    showComplTodo(ul)
 })
 
 

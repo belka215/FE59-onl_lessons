@@ -7,12 +7,12 @@ export function setData(todos) {
     localStorage.setItem("todos", JSON.stringify(todos));
 }
 
-export function getDataFromLS(todoList) {
+export function getDataFromLS(todoList, ul) {
     if (todoList) {
         todoList.forEach(item => {
             const isChecked = item.isChecked;
 
-            createTodo(item);
+            createTodo(item, ul);
 
             if (isChecked) {
                 todoItem.classList.add('checked');
@@ -23,7 +23,7 @@ export function getDataFromLS(todoList) {
     }
 }
 
-export function setTodoToLS({ id, date, text, isChecked }, uId) {
+export function setTodoToLS({ id, date, text}) {
     const todo = {
         id,
         text,
@@ -41,7 +41,8 @@ export function setTodoToLS({ id, date, text, isChecked }, uId) {
     }
 }
 
-export function createTodo({ id, date, text, isChecked }, uId) {
+export function createTodo({ id, date, text, isChecked }, uId, ul, allTodo, todoCount) {
+    console.log(ul)
     const todoItem = document.createElement('li');
     todoItem.classList.add('todo-list__item');
     todoItem.id = id;
@@ -55,7 +56,6 @@ export function createTodo({ id, date, text, isChecked }, uId) {
                 <p class="date">${date}</p>
             </div>
         </label>`;
-
     ul.append(todoItem);
 
     ++todoCount;
@@ -63,7 +63,7 @@ export function createTodo({ id, date, text, isChecked }, uId) {
     allTodo.textContent = todoCount;
 }
 
-export function deleteTodo(event) {
+export function deleteTodo(event, ul, todoCount, allTodo) {
     console.log(event.target)
     const id = event.target.id;
     console.log(id);
@@ -85,7 +85,7 @@ export function deleteTodo(event) {
     allTodo.textContent = todoCount;
 }
 
-export function checked(event) {
+export function checked(event, ul) {
     const id = event.target.id;
     const liId = `todo-item-${id.split('-').at(-1)}`;
     const textId = `text-${id.split('-').at(-1)}`;
@@ -96,7 +96,7 @@ export function checked(event) {
     currentText.classList.toggle('text_checked');
 }
 
-export function lsChecked(event) {
+export function lsChecked(event, ul) {
     const id = event.target.id;
     const chId = `checkbox-${id.split('-').at(-1)}`;
     const checkbox = ul.querySelector(`#${chId}`);
@@ -115,7 +115,7 @@ export function lsChecked(event) {
     }
 }
 
-export function search(event) {
+export function search(event, ul) {
     const searchedText = event.target.value;
 
     const todos = getData();
@@ -142,7 +142,7 @@ function complTodosCount() {
     complTodo.textContent = complCount;
 }
 
-export function showComplTodo() {
+export function showComplTodo(ul) {
     const data = getData();
     const filterdTodos = data.filter((item) => item.isChecked);
 
