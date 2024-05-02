@@ -50,8 +50,8 @@ addBtn.addEventListener("click", () => {
     const id = `todo-item-${uId}`;
 
     if (text) {
-        createTodo({ id, date, text, isChecked: false }, uId, ul, allTodo, todoCount);
-        setTodoToLS({ id, date, text, isChecked: false }, uId, ul);
+        createTodo({ id, date, text, isChecked: false }, ul, uId, allTodo, todoCount);
+        setTodoToLS({ id, date, text, isChecked: false });
 
         ++uId;
 
@@ -61,11 +61,11 @@ addBtn.addEventListener("click", () => {
 
 ul.addEventListener('click', (event) => {
     if (event.target.classList.contains('exit-btn')) {
-        deleteTodo(event, ul, allTodo, todoCount, allTodo);
+        deleteTodo(event, ul, todoCount, allTodo);
     }
     if (event.target.classList.contains('checkbox')) {
-        checked(event, ul, allTodo, todoCount);
-        lsChecked(event, ul, allTodo, todoCount);
+        checked(event, ul);
+        lsChecked(event, ul);
     }
 });
 

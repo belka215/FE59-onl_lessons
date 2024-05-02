@@ -11,7 +11,7 @@ export function getDataFromLS(todoList, ul) {
     if (todoList) {
         todoList.forEach(item => {
             const isChecked = item.isChecked;
-
+            debugger
             createTodo(item, ul);
 
             if (isChecked) {
@@ -23,12 +23,12 @@ export function getDataFromLS(todoList, ul) {
     }
 }
 
-export function setTodoToLS({ id, date, text}) {
+export function setTodoToLS({ id, date, text, isChecked}) {
     const todo = {
         id,
         text,
         date,
-        isChecked: false,
+        isChecked,
     }
 
     const data = localStorage.getItem('todos');
@@ -41,11 +41,11 @@ export function setTodoToLS({ id, date, text}) {
     }
 }
 
-export function createTodo({ id, date, text, isChecked }, uId, ul, allTodo, todoCount) {
-    console.log(ul)
+export function createTodo({ id, date, text, isChecked }, ul, uId, allTodo, todoCount) {
     const todoItem = document.createElement('li');
     todoItem.classList.add('todo-list__item');
     todoItem.id = id;
+    debugger;
 
     todoItem.innerHTML = `
         <input type="checkbox" id="checkbox-${uId}" name="chb1" class="checkbox" ${isChecked ? "checked" : ""}>
@@ -59,8 +59,10 @@ export function createTodo({ id, date, text, isChecked }, uId, ul, allTodo, todo
     ul.append(todoItem);
 
     ++todoCount;
+    
 
     allTodo.textContent = todoCount;
+    debugger;
 }
 
 export function deleteTodo(event, ul, todoCount, allTodo) {
