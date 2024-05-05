@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap');
+
+.container {
+    margin: 100px auto;
+    max-width: 1300px;
+    text-align: center;
+    font-size: 80px;
+    font-family: "Rajdhani";
+}
+
+.btn-container {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.btn {
+    padding: 20px 0;
+    width: calc(100% / 3 - 300px / 3);
+    font-size: 25px;
+    font-family: "Rajdhani";
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.start-btn {
+    background-color: rgba(46, 118, 46, 0.655);
+}
+
+.stop-btn {
+    background-color: rgba(229, 69, 69, 0.847);
+}
+
+.pause-btn {
+    background-color: rgb(175, 174, 174);
+}
