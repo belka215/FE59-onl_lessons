@@ -3,52 +3,6 @@
   font-family: "Segoe UI";
   src: url(/SegoeUI.6c9fb0e8.ttf);
 }
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  outline: none;
-  border: none;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-main {
-  overflow: hidden;
-}
-
-ul, ol, li {
-  list-style-type: none;
-}
-
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
-::placeholder {
-  font-family: "Oxygen";
-  font-size: 14px;
-}
-
-.closed {
-  display: none;
-}
-
-.one {
-  aspect-ratio: 1/0.8;
-}
-
-.two {
-  aspect-ratio: 2/3;
-}
-
-.three {
-  aspect-ratio: 3/6;
-}
-
 .header {
   width: 100%;
 }
@@ -107,9 +61,32 @@ a {
 
 .dropdown {
   height: 100%;
+  position: relative;
 }
-
-.dropbtn {
+.dropdown__content {
+  display: none;
+  position: absolute;
+  width: 100%;
+  background-color: white;
+  border-radius: 24px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  z-index: 2;
+}
+.dropdown__content__board {
+  margin: 5px;
+  padding: 15px;
+  border-radius: 24px;
+  text-align: center;
+  font-family: "Segoe UI";
+  font-size: 16px;
+  font-weight: 500;
+  color: rgb(49, 49, 49);
+  cursor: pointer;
+}
+.dropdown__content__board:hover {
+  background-color: rgba(128, 128, 128, 0.39);
+}
+.dropdown__dropbtn {
   position: relative;
   width: 100%;
   height: 100%;
@@ -242,6 +219,7 @@ a {
   text-align: center;
   background-color: white;
   border-radius: 24px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   z-index: 3;
 }
 .modal__title {
@@ -288,6 +266,62 @@ a {
   font-weight: 500;
   color: white;
   cursor: pointer;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+main {
+  overflow: hidden;
+}
+
+ul,
+ol,
+li {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+::placeholder {
+  font-family: "Oxygen";
+  font-size: 14px;
+}
+
+.opened {
+  display: block;
+}
+
+.one {
+  aspect-ratio: 1/0.8;
+}
+
+.two {
+  aspect-ratio: 2/3;
+}
+
+.three {
+  aspect-ratio: 3/6;
+}
+
+.btn {
+  transition: 0.3s;
+}
+.btn:hover {
+  background-color: #c5001e;
+  transition: 0.3s;
 }
 
 /*# sourceMappingURL=/styles.434540e1.css.map */

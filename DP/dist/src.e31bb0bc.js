@@ -117,60 +117,31 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"index.js":[function(require,module,exports) {
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
-function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-var arrow = document.querySelector('.arrow');
-var dropBtn = document.querySelector('.dropbtn');
-var searchField = document.querySelector('.search-field');
-var columns = document.querySelector(".columns");
-var saveBtn = document.querySelector('.overlay__save');
-var cardData;
-fetch('https://6646535251e227f23aae9ab7.mockapi.io/v1/posts').then(function (response) {
-  return response.json();
-}).then(function (response) {
-  response.forEach(function (item) {
-    createCard(item.id, item.image, item.avatar, item.hashtag);
-  });
-  return response;
-}).then(function (data) {
-  return cardData = _objectSpread({}, data);
+})({"scripts/functions.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
 });
-dropBtn.addEventListener('click', function () {
-  arrow.classList.toggle("active");
-});
-columns.addEventListener('click', function (event) {
-  var id = event.target.id;
-  var cardId = "item-".concat(id.split('-').at(-1));
-  var currentCard = columns.querySelector("#".concat(cardId));
-  if (event.target.classList.contains('overlay__save')) {
-    showModal(currentCard);
-  }
-  if (event.target.classList.contains('modal__close')) {
-    var modal = columns.querySelector('.modal');
-    modal.remove();
-  }
-});
+exports.createCard = createCard;
+exports.search = search;
+exports.showModal = showModal;
+function createCard(id, image, avatar, hashtag, columns) {
+  var card = document.createElement('figure');
+  card.classList.add('columns__item');
+  card.id = "item-".concat(id);
+  card.innerHTML = "\n      <div class=\"img-container\">\n                      <img src=\"".concat(image, "\" alt=\"\" class=\"columns__item__img\">\n                      <div class=\"overlay\">\n                          <button class=\"overlay__save btn\" id=\"save-btn-").concat(id, "\">Save</button>\n                          <button class=\"overlay__report\">Report</button>\n                      </div>\n                  </div>\n                  <figcaption class=\"figcaption\">\n                      <img src=\"").concat(avatar, "\" class=\"figcaption__avatar\">\n                      <p class=\"figcaption__hashtag\">").concat(hashtag, "</p>\n                  </figcaption>");
+  columns.append(card);
+  aspectRatio(id, card);
+}
 function showModal(currentCard) {
   var modal = document.createElement('div');
   modal.classList.add('modal');
   modal.id = 'modal';
-  modal.innerHTML = "\n  <div class=\"modal__title\">Save to\n        <div class=\"modal__close\"></div>\n    </div>\n    <div class=\"boards-container\">\n        <button class=\"boards-container__board\">Board 1</button>\n        <button class=\"boards-container__board\">Board 2</button>\n        <button class=\"boards-container__board\">Board 3</button>\n    </div>";
+  modal.innerHTML = "\n    <div class=\"modal__title\">Save to\n          <div class=\"modal__close\"></div>\n      </div>\n      <div class=\"boards-container\">\n          <button class=\"boards-container__board btn\">Board 1</button>\n          <button class=\"boards-container__board btn \">Board 2</button>\n          <button class=\"boards-container__board btn\">Board 3</button>\n      </div>";
   currentCard.append(modal);
 }
-function createCard(id, image, avatar, hashtag) {
-  var card = document.createElement('figure');
-  card.classList.add('columns__item');
-  card.id = "item-".concat(id);
-  card.innerHTML = "\n    <div class=\"img-container\">\n                    <img src=\"".concat(image, "\" alt=\"\" class=\"columns__item__img\">\n                    <div class=\"overlay\">\n                        <button class=\"overlay__save\" id=\"save-btn-").concat(id, "\">Save</button>\n                        <button class=\"overlay__report\">Report</button>\n                    </div>\n                </div>\n                <figcaption class=\"figcaption\">\n                    <img src=\"").concat(avatar, "\" class=\"figcaption__avatar\">\n                    <p class=\"figcaption__hashtag\">").concat(hashtag, "</p>\n                </figcaption>");
-  columns.append(card);
-  aspectRatio(id, card);
-}
-function showFilteredCards(_ref) {
+function showFilteredCards(_ref, columns) {
   var id = _ref.id,
     image = _ref.image,
     avatar = _ref.avatar,
@@ -178,7 +149,7 @@ function showFilteredCards(_ref) {
   var card = document.createElement('figure');
   card.classList.add('columns__item');
   card.id = "item-".concat(id);
-  card.innerHTML = "\n    <div class=\"img-container\">\n                    <img src=\"".concat(image, "\" alt=\"\" class=\"columns__item__img\">\n                    <div class=\"overlay\">\n                        <button class=\"overlay__save\" id=\"save-btn-").concat(id, "\">Save</button>\n                        <button class=\"overlay__report\">Report</button>\n                    </div>\n                </div>\n                <figcaption class=\"figcaption\">\n                    <img src=\"").concat(avatar, "\" class=\"figcaption__avatar\">\n                    <p class=\"figcaption__hashtag\">").concat(hashtag, "</p>\n                </figcaption>");
+  card.innerHTML = "\n      <div class=\"img-container\">\n                      <img src=\"".concat(image, "\" alt=\"\" class=\"columns__item__img\">\n                      <div class=\"overlay\">\n                          <button class=\"overlay__save\" id=\"save-btn-").concat(id, "\">Save</button>\n                          <button class=\"overlay__report\">Report</button>\n                      </div>\n                  </div>\n                  <figcaption class=\"figcaption\">\n                      <img src=\"").concat(avatar, "\" class=\"figcaption__avatar\">\n                      <p class=\"figcaption__hashtag\">").concat(hashtag, "</p>\n                  </figcaption>");
   columns.append(card);
   aspectRatio(id, card);
 }
@@ -193,7 +164,7 @@ function aspectRatio(id, card) {
     img.classList.add('one');
   }
 }
-function search(event, columns) {
+function search(event, columns, cardData) {
   var searchedText = event.target.value;
   cardData = Object.values(cardData);
   var searchedCards = cardData.filter(function (card) {
@@ -202,13 +173,56 @@ function search(event, columns) {
   console.log(searchedCards);
   columns.innerHTML = '';
   searchedCards.forEach(function (card) {
-    showFilteredCards(card);
+    showFilteredCards(card, columns);
   });
 }
-searchField.addEventListener('input', function (event) {
-  search(event, columns);
+},{}],"index.js":[function(require,module,exports) {
+"use strict";
+
+var _functions = require("./scripts/functions.js");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+var arrow = document.querySelector('.arrow');
+var dropBtn = document.querySelector('.dropdown__dropbtn');
+var dropList = document.querySelector('.dropdown__content');
+var searchField = document.querySelector('.search-field');
+var columns = document.querySelector(".columns");
+var saveBtn = document.querySelector('.overlay__save');
+var cardData;
+fetch('https://6646535251e227f23aae9ab7.mockapi.io/v1/posts').then(function (response) {
+  return response.json();
+}).then(function (response) {
+  response.forEach(function (item) {
+    (0, _functions.createCard)(item.id, item.image, item.avatar, item.hashtag, columns);
+  });
+  return response;
+}).then(function (data) {
+  return cardData = _objectSpread({}, data);
 });
-},{}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+dropBtn.addEventListener('click', function () {
+  arrow.classList.toggle("active");
+  dropList.classList.toggle('opened');
+});
+columns.addEventListener('click', function (event) {
+  var id = event.target.id;
+  var cardId = "item-".concat(id.split('-').at(-1));
+  var currentCard = columns.querySelector("#".concat(cardId));
+  if (event.target.classList.contains('overlay__save')) {
+    (0, _functions.showModal)(currentCard);
+  }
+  if (event.target.classList.contains('modal__close')) {
+    var modal = columns.querySelector('.modal');
+    modal.remove();
+  }
+});
+searchField.addEventListener('input', function (event) {
+  (0, _functions.search)(event, columns, cardData);
+});
+},{"./scripts/functions.js":"scripts/functions.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -233,7 +247,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59014" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55224" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

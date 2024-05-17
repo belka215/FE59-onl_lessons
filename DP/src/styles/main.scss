@@ -14,7 +14,9 @@ main {
     overflow: hidden;
 }
 
-ul, ol, li {
+ul,
+ol,
+li {
     list-style-type: none;
 }
 
@@ -24,12 +26,12 @@ a {
 }
 
 ::placeholder {
-    font-family: 'Oxygen' ;
-    font-size: 14px;    
+    font-family: 'Oxygen';
+    font-size: 14px;
 }
 
-.closed {
-    display: none;
+.opened {
+    display: block;
 }
 
 .one {
@@ -42,4 +44,12 @@ a {
 
 .three {
     aspect-ratio: 3/6;
+}
+
+.btn {
+    transition: .3s;
+    &:hover {
+        background-color: #c5001e;
+        transition: .3s;
+    }
 }

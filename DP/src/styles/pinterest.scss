@@ -64,20 +64,48 @@
 
 .dropdown {
     height: 100%;
+    position: relative;
+
+    &__content {
+        display: none;
+        position: absolute;
+        width: 100%;
+        background-color: white;
+        border-radius: 24px;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;;
+        z-index: 2;
+
+        &__board {
+            margin: 5px;
+            padding: 15px;
+            border-radius: 24px;
+            text-align: center;
+            font-family: "Segoe UI";
+            font-size: 16px;
+            font-weight: 500;
+            color: rgb(49, 49, 49);
+            cursor: pointer;
+
+            &:hover {
+                background-color: rgba(128, 128, 128, 0.39);
+            }
+        }
+    }
+
+    &__dropbtn {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        border-radius: 24px;
+        background-color: #e60023;
+        font-family: 'Roboto', sans-serif;
+        font-size: 16px;
+        font-weight: 500;
+        color: white;
+        cursor: pointer;
+    }
 }
 
-.dropbtn {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    border-radius: 24px;
-    background-color: #e60023;
-    font-family: 'Roboto', sans-serif;
-    font-size: 16px;
-    font-weight: 500;
-    color: white;
-    cursor: pointer;
-}
 
 .arrow {
     display: inline-block;
@@ -206,6 +234,7 @@
     text-align: center;
     background-color: white;
     border-radius: 24px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     z-index: 3;
 
     &__title {
