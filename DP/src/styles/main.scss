@@ -1,0 +1,45 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+    border: none;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+main {
+    overflow: hidden;
+}
+
+ul, ol, li {
+    list-style-type: none;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+::placeholder {
+    font-family: 'Oxygen' ;
+    font-size: 14px;    
+}
+
+.closed {
+    display: none;
+}
+
+.one {
+    aspect-ratio: 1/0.8;
+}
+
+.two {
+    aspect-ratio: 2/3;
+}
+
+.three {
+    aspect-ratio: 3/6;
+}
