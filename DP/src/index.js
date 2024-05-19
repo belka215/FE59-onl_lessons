@@ -1,7 +1,8 @@
 import {
   showModal,
   createCard,
-  search
+  search,
+  showReport
 } from "./scripts/functions.js";
 
 const arrow = document.querySelector('.arrow');
@@ -9,7 +10,8 @@ const dropBtn = document.querySelector('.dropdown__dropbtn');
 const dropList = document.querySelector('.dropdown__content')
 const searchField = document.querySelector('.search-field')
 const columns = document.querySelector(".columns")
-const saveBtn = document.querySelector('.overlay__save');
+const report = document.querySelector('.report');
+const cancel = document.querySelector('.cancel')
 let cardData;
 
 fetch('https://6646535251e227f23aae9ab7.mockapi.io/v1/posts')
@@ -43,9 +45,23 @@ columns.addEventListener('click', (event) => {
     const modal = columns.querySelector('.modal');
     modal.remove();
   }
+
+  if (event.target.classList.contains('overlay__report')) {
+    showReport(report)
+  }
 })
 
 searchField.addEventListener('input', (event) => {
   search(event, columns, cardData)
 })
+
+cancel.addEventListener('click', () => {
+  report.classList.remove('flex')
+})
+
+// report.addEventListener('click', () => {
+//   report.classList.remove('flex')
+// })
+
+
 

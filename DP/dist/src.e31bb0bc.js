@@ -126,11 +126,12 @@ Object.defineProperty(exports, "__esModule", {
 exports.createCard = createCard;
 exports.search = search;
 exports.showModal = showModal;
+exports.showReport = showReport;
 function createCard(id, image, avatar, hashtag, columns) {
   var card = document.createElement('figure');
   card.classList.add('columns__item');
   card.id = "item-".concat(id);
-  card.innerHTML = "\n      <div class=\"img-container\">\n                      <img src=\"".concat(image, "\" alt=\"\" class=\"columns__item__img\">\n                      <div class=\"overlay\">\n                          <button class=\"overlay__save btn\" id=\"save-btn-").concat(id, "\">Save</button>\n                          <button class=\"overlay__report\">Report</button>\n                      </div>\n                  </div>\n                  <figcaption class=\"figcaption\">\n                      <img src=\"").concat(avatar, "\" class=\"figcaption__avatar\">\n                      <p class=\"figcaption__hashtag\">").concat(hashtag, "</p>\n                  </figcaption>");
+  card.innerHTML = "\n      <div class=\"img-container\">\n                      <img src=\"".concat(image, "\" alt=\"\" class=\"columns__item__img\">\n                      <div class=\"overlay\">\n                          <button class=\"overlay__save btn-red\" id=\"save-btn-").concat(id, "\">Save</button>\n                          <button class=\"overlay__report\">Report</button>\n                      </div>\n                  </div>\n                  <figcaption class=\"figcaption\">\n                      <img src=\"").concat(avatar, "\" class=\"figcaption__avatar\">\n                      <p class=\"figcaption__hashtag\">#").concat(hashtag, "</p>\n                  </figcaption>");
   columns.append(card);
   aspectRatio(id, card);
 }
@@ -138,8 +139,11 @@ function showModal(currentCard) {
   var modal = document.createElement('div');
   modal.classList.add('modal');
   modal.id = 'modal';
-  modal.innerHTML = "\n    <div class=\"modal__title\">Save to\n          <div class=\"modal__close\"></div>\n      </div>\n      <div class=\"boards-container\">\n          <button class=\"boards-container__board btn\">Board 1</button>\n          <button class=\"boards-container__board btn \">Board 2</button>\n          <button class=\"boards-container__board btn\">Board 3</button>\n      </div>";
+  modal.innerHTML = "\n    <div class=\"modal__title\">Save to\n          <div class=\"modal__close\"></div>\n      </div>\n      <div class=\"boards-container\">\n          <button class=\"boards-container__board btn-red\">Board 1</button>\n          <button class=\"boards-container__board btn-red \">Board 2</button>\n          <button class=\"boards-container__board btn-red\">Board 3</button>\n      </div>";
   currentCard.append(modal);
+}
+function showReport(report) {
+  report.classList.add('flex');
 }
 function showFilteredCards(_ref, columns) {
   var id = _ref.id,
@@ -149,7 +153,7 @@ function showFilteredCards(_ref, columns) {
   var card = document.createElement('figure');
   card.classList.add('columns__item');
   card.id = "item-".concat(id);
-  card.innerHTML = "\n      <div class=\"img-container\">\n                      <img src=\"".concat(image, "\" alt=\"\" class=\"columns__item__img\">\n                      <div class=\"overlay\">\n                          <button class=\"overlay__save\" id=\"save-btn-").concat(id, "\">Save</button>\n                          <button class=\"overlay__report\">Report</button>\n                      </div>\n                  </div>\n                  <figcaption class=\"figcaption\">\n                      <img src=\"").concat(avatar, "\" class=\"figcaption__avatar\">\n                      <p class=\"figcaption__hashtag\">").concat(hashtag, "</p>\n                  </figcaption>");
+  card.innerHTML = "\n      <div class=\"img-container\">\n                      <img src=\"".concat(image, "\" alt=\"\" class=\"columns__item__img\">\n                      <div class=\"overlay\">\n                          <button class=\"overlay__save btn-red\" id=\"save-btn-").concat(id, "\">Save</button>\n                          <button class=\"overlay__report\">Report</button>\n                      </div>\n                  </div>\n                  <figcaption class=\"figcaption\">\n                      <img src=\"").concat(avatar, "\" class=\"figcaption__avatar\">\n                      <p class=\"figcaption__hashtag\">#").concat(hashtag, "</p>\n                  </figcaption>");
   columns.append(card);
   aspectRatio(id, card);
 }
@@ -191,7 +195,8 @@ var dropBtn = document.querySelector('.dropdown__dropbtn');
 var dropList = document.querySelector('.dropdown__content');
 var searchField = document.querySelector('.search-field');
 var columns = document.querySelector(".columns");
-var saveBtn = document.querySelector('.overlay__save');
+var report = document.querySelector('.report');
+var cancel = document.querySelector('.cancel');
 var cardData;
 fetch('https://6646535251e227f23aae9ab7.mockapi.io/v1/posts').then(function (response) {
   return response.json();
@@ -218,10 +223,20 @@ columns.addEventListener('click', function (event) {
     var modal = columns.querySelector('.modal');
     modal.remove();
   }
+  if (event.target.classList.contains('overlay__report')) {
+    (0, _functions.showReport)(report);
+  }
 });
 searchField.addEventListener('input', function (event) {
   (0, _functions.search)(event, columns, cardData);
 });
+cancel.addEventListener('click', function () {
+  report.classList.remove('flex');
+});
+
+// report.addEventListener('click', () => {
+//   report.classList.remove('flex')
+// })
 },{"./scripts/functions.js":"scripts/functions.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -247,7 +262,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55224" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58218" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

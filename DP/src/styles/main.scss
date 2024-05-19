@@ -34,6 +34,10 @@ a {
     display: block;
 }
 
+.flex {
+    display: flex;
+}
+
 .one {
     aspect-ratio: 1/0.8;
 }
@@ -46,10 +50,25 @@ a {
     aspect-ratio: 3/6;
 }
 
-.btn {
+.btn-red {
     transition: .3s;
     &:hover {
         background-color: #c5001e;
+        transition: .3s;
+    }
+}
+
+.btn-grey {
+    border-radius: 24px;
+    font-family: "Segoe UI";
+    font-size: 16px;
+    font-weight: 500;
+    color: rgb(60, 60, 60);
+    transition: .3s;
+    cursor: pointer;
+
+    &:hover {
+        background-color: rgb(178, 178, 178);
         transition: .3s;
     }
 }

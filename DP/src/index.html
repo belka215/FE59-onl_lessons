@@ -47,7 +47,7 @@
             </div>
             <div class="header__right">
                 <div class="dropdown">
-                    <button class="dropdown__dropbtn btn">
+                    <button class="dropdown__dropbtn btn-red">
                         Your Pins
                         <div class="arrow"></div>
                     </button>
@@ -66,7 +66,7 @@
                 <div class="img-container">
                     <img src="./assets/img/pic12.jpg" alt="" class="columns__item__img">
                     <div class="overlay">
-                        <button class="overlay__save" id="save-btn-1">Save</button>
+                        <button class="overlay__save btn-red" id="save-btn-1">Save</button>
                         <button class="overlay__report">Report</button>
                     </div>
                 </div>
@@ -280,6 +280,83 @@
         <button class="boards-container__board">Board 2</button>
         <button class="boards-container__board">Board 3</button>
     </div> -->
+    <div class="report">
+        <div class="report__content">
+            <p class="report__content__title">
+                Report Pin
+            </p>
+            <div class="report__content__reasons">
+                <div class="reason">
+                    <input type="checkbox" id="spam">
+                    <label for="spam">
+                        <span class="text">Spam<br></span>
+                        <span class="subtext">Misleading or repetitive posts</span>
+                    </label>
+                </div>
+                <div class="reason">
+                    <input type="checkbox" id="nud">
+                    <label for="nud">
+                        <span class="text">Nudity, pornography or sexualised content<br></span>
+                        <span class="subtext">Sexually explicit content involving adults or nudity, non-nudity or
+                            intentional misuse involving minors</span>
+                    </label>
+                </div>
+                <div class="reason">
+                    <input type="checkbox" id="harm">
+                    <label for="harm">
+                        <span class="text">Self-harm<br></span>
+                        <span class="subtext">Eating disorders, self-harm, suicide</span>
+                    </label>
+                </div>
+                <div class="reason">
+                    <input type="checkbox" id="misinfo">
+                    <label for="misinfo">
+                        <span class="text">Misinformation<br></span>
+                        <span class="subtext">Health, climate, voting misinformation or conspiracies</span>
+                    </label>
+                </div>
+                <div class="reason">
+                    <input type="checkbox" id="hate">
+                    <label for="hate">
+                        <span class="text">Hateful activities<br></span>
+                        <span class="subtext">Prejudice, stereotypes, white supremacy, slurs</span>
+                    </label>
+                </div>
+                <div class="reason">
+                    <input type="checkbox" id="danger">
+                    <label for="danger">
+                        <span class="text">Dangerous goods<br></span>
+                        <span class="subtext">Drugs, weapons, regulated products</span>
+                    </label>
+                </div>
+                <div class="reason">
+                    <input type="checkbox" id="harassment">
+                    <label for="harassment">
+                        <span class="text">Harassment or criticism<br></span>
+                        <span class="subtext">Insults, threats, non-consensual nude images</span>
+                    </label>
+                </div>
+                <div class="reason">
+                    <input type="checkbox" id="violence">
+                    <label for="violence">
+                        <span class="text">Graphic violence<br></span>
+                        <span class="subtext">Violent images or promotion of violence</span>
+                    </label>
+                </div>
+                <div class="reason">
+                    <input type="checkbox" id="propertry">
+                    <label for="propertry">
+                        <span class="text">My intellectual property<br></span>
+                        <span class="subtext">Copyright or trademark infringement</span>
+                    </label>
+                </div>
+            </div>
+            <div class="report__content__btns">
+                <button class="cancel btn-grey">Cancel</button>
+                <button class="send btn-grey">Send</button>
+            </div>
+        </div>
 </body>
 <script src="index.js" type="module"></script>
+
 </html>

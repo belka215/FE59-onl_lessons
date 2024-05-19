@@ -6,13 +6,13 @@ export function createCard(id, image, avatar, hashtag, columns) {
       <div class="img-container">
                       <img src="${image}" alt="" class="columns__item__img">
                       <div class="overlay">
-                          <button class="overlay__save btn" id="save-btn-${id}">Save</button>
+                          <button class="overlay__save btn-red" id="save-btn-${id}">Save</button>
                           <button class="overlay__report">Report</button>
                       </div>
                   </div>
                   <figcaption class="figcaption">
                       <img src="${avatar}" class="figcaption__avatar">
-                      <p class="figcaption__hashtag">${hashtag}</p>
+                      <p class="figcaption__hashtag">#${hashtag}</p>
                   </figcaption>`;
     columns.append(card);
     aspectRatio(id, card)
@@ -27,11 +27,15 @@ export function showModal(currentCard) {
           <div class="modal__close"></div>
       </div>
       <div class="boards-container">
-          <button class="boards-container__board btn">Board 1</button>
-          <button class="boards-container__board btn ">Board 2</button>
-          <button class="boards-container__board btn">Board 3</button>
+          <button class="boards-container__board btn-red">Board 1</button>
+          <button class="boards-container__board btn-red ">Board 2</button>
+          <button class="boards-container__board btn-red">Board 3</button>
       </div>`;
     currentCard.append(modal)
+}
+
+export function showReport(report) {
+    report.classList.add('flex')
 }
 
 function showFilteredCards({ id, image, avatar, hashtag }, columns) {
@@ -43,13 +47,13 @@ function showFilteredCards({ id, image, avatar, hashtag }, columns) {
       <div class="img-container">
                       <img src="${image}" alt="" class="columns__item__img">
                       <div class="overlay">
-                          <button class="overlay__save" id="save-btn-${id}">Save</button>
+                          <button class="overlay__save btn-red" id="save-btn-${id}">Save</button>
                           <button class="overlay__report">Report</button>
                       </div>
                   </div>
                   <figcaption class="figcaption">
                       <img src="${avatar}" class="figcaption__avatar">
-                      <p class="figcaption__hashtag">${hashtag}</p>
+                      <p class="figcaption__hashtag">#${hashtag}</p>
                   </figcaption>`;
     columns.append(card);
     aspectRatio(id, card)

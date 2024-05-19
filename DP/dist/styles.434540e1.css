@@ -185,7 +185,12 @@
   font-size: 18px;
   font-weight: 500;
   color: black;
+  transition: 0.3s;
   cursor: pointer;
+}
+.overlay__report:hover {
+  background-color: rgb(214, 214, 214);
+  transition: 0.3s;
 }
 
 .figcaption {
@@ -268,6 +273,69 @@
   cursor: pointer;
 }
 
+.report {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.74);
+  z-index: 5;
+}
+.report__content {
+  width: 35%;
+  padding: 30px;
+  background-color: white;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  border-radius: 24px;
+}
+.report__content__title {
+  margin-bottom: 20px;
+  text-align: center;
+  font-family: "Segoe UI";
+  font-size: 22px;
+  font-weight: 700;
+  color: black;
+}
+.report__content__reasons {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  font-family: "Segoe UI";
+  font-size: 17px;
+  font-weight: 500;
+  color: rgb(60, 60, 60);
+}
+.report__content__btns {
+  display: flex;
+  justify-content: end;
+  gap: 10px;
+  margin-top: 5%;
+}
+
+.cancel {
+  padding: 10px;
+}
+
+.send {
+  padding: 10px 15px;
+}
+
+.text {
+  margin-left: 5px;
+}
+
+.subtext {
+  margin-left: 22px;
+  font-family: "Segoe UI";
+  font-size: 14px;
+  font-weight: 500;
+  color: rgb(60, 60, 60);
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -304,6 +372,10 @@ a {
   display: block;
 }
 
+.flex {
+  display: flex;
+}
+
 .one {
   aspect-ratio: 1/0.8;
 }
@@ -316,11 +388,25 @@ a {
   aspect-ratio: 3/6;
 }
 
-.btn {
+.btn-red {
   transition: 0.3s;
 }
-.btn:hover {
+.btn-red:hover {
   background-color: #c5001e;
+  transition: 0.3s;
+}
+
+.btn-grey {
+  border-radius: 24px;
+  font-family: "Segoe UI";
+  font-size: 16px;
+  font-weight: 500;
+  color: rgb(60, 60, 60);
+  transition: 0.3s;
+  cursor: pointer;
+}
+.btn-grey:hover {
+  background-color: rgb(178, 178, 178);
   transition: 0.3s;
 }
 
