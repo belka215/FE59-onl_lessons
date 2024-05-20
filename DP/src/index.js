@@ -2,7 +2,8 @@ import {
   showModal,
   createCard,
   search,
-  showReport
+  showReport,
+  saveData
 } from "./scripts/functions.js";
 
 const arrow = document.querySelector('.arrow');
@@ -48,6 +49,10 @@ columns.addEventListener('click', (event) => {
 
   if (event.target.classList.contains('overlay__report')) {
     showReport(report)
+  }
+
+  if(event.target.classList.contains('boards-container__board')) {
+    saveData(event);
   }
 })
 

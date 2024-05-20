@@ -617,6 +617,7 @@ columns.addEventListener("click", (event)=>{
         modal.remove();
     }
     if (event.target.classList.contains("overlay__report")) (0, _functionsJs.showReport)(report);
+    if (event.target.classList.contains("boards-container__board")) (0, _functionsJs.saveData)(event);
 });
 searchField.addEventListener("input", (event)=>{
     (0, _functionsJs.search)(event, columns, cardData);
@@ -635,21 +636,22 @@ parcelHelpers.export(exports, "createCard", ()=>createCard);
 parcelHelpers.export(exports, "showModal", ()=>showModal);
 parcelHelpers.export(exports, "showReport", ()=>showReport);
 parcelHelpers.export(exports, "search", ()=>search);
+parcelHelpers.export(exports, "saveData", ()=>saveData);
 function createCard(id, image, avatar, hashtag, columns) {
     const card = document.createElement("figure");
     card.classList.add("columns__item");
     card.id = `item-${id}`;
     card.innerHTML = `
       <div class="img-container">
-                      <img src="${image}" alt="" class="columns__item__img">
+                      <img src="${image}" alt="" class="columns__item__img" id="img-${id}">
                       <div class="overlay">
                           <button class="overlay__save btn-red" id="save-btn-${id}">Save</button>
                           <button class="overlay__report">Report</button>
                       </div>
                   </div>
                   <figcaption class="figcaption">
-                      <img src="${avatar}" class="figcaption__avatar">
-                      <p class="figcaption__hashtag">#${hashtag}</p>
+                      <img src="${avatar}" class="figcaption__avatar" id="ava-${id}">
+                      <p class="figcaption__hashtag" id="hashtag-${id}">#${hashtag}</p>
                   </figcaption>`;
     columns.append(card);
     aspectRatio(id, card);
@@ -663,9 +665,9 @@ function showModal(currentCard) {
           <div class="modal__close"></div>
       </div>
       <div class="boards-container">
-          <button class="boards-container__board btn-red">Board 1</button>
-          <button class="boards-container__board btn-red ">Board 2</button>
-          <button class="boards-container__board btn-red">Board 3</button>
+          <button class="boards-container__board btn-red" id="board-1">Board 1</button>
+          <button class="boards-container__board btn-red" id="board-2">Board 2</button>
+          <button class="boards-container__board btn-red" id="board-3">Board 3</button>
       </div>`;
     currentCard.append(modal);
 }
@@ -678,15 +680,15 @@ function showFilteredCards({ id, image, avatar, hashtag }, columns) {
     card.id = `item-${id}`;
     card.innerHTML = `
       <div class="img-container">
-                      <img src="${image}" alt="" class="columns__item__img">
+                      <img src="${image}" alt="" class="columns__item__img" id="img-${id}">
                       <div class="overlay">
                           <button class="overlay__save btn-red" id="save-btn-${id}">Save</button>
                           <button class="overlay__report">Report</button>
                       </div>
                   </div>
                   <figcaption class="figcaption">
-                      <img src="${avatar}" class="figcaption__avatar">
-                      <p class="figcaption__hashtag">#${hashtag}</p>
+                      <img src="${avatar}" class="figcaption__avatar id="ava-${id}">
+                      <p class="figcaption__hashtag" id="hashtag-${id}">#${hashtag}</p>
                   </figcaption>`;
     columns.append(card);
     aspectRatio(id, card);
@@ -708,6 +710,29 @@ function search(event, columns, cardData) {
     searchedCards.forEach((card)=>{
         showFilteredCards(card, columns);
     });
+}
+function saveData(event) {
+    const boardId = event.target.id;
+    const currentId = event.target.parentElement.parentElement.parentElement.id.split("-").at(-1);
+    const currentImg = document.getElementById(`img-${currentId}`).src;
+    const currentAva = document.getElementById(`ava-${currentId}`).src;
+    const currentHashtag = document.getElementById(`hashtag-${currentId}`).innerText;
+    const cardData = {
+        id: currentId,
+        img: currentImg,
+        ava: currentAva,
+        hashtag: currentHashtag
+    };
+    debugger;
+    const data = localStorage.getItem(`${boardId}`);
+    if (!data) localStorage.setItem(`${boardId}`, JSON.stringify([
+        data
+    ]));
+    else {
+        const result = JSON.parse(data);
+        result.push(cardData);
+        localStorage.setItem(`${boardId}`, JSON.stringify(result));
+    }
 }
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gkKU3":[function(require,module,exports) {
