@@ -28,6 +28,10 @@ a {
 ::placeholder {
     font-family: 'Oxygen';
     font-size: 14px;
+
+    @media(max-width: 1200px) {
+        text-align: center;
+    }
 }
 
 .opened {
