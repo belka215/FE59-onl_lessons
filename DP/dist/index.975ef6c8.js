@@ -585,6 +585,7 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
 
 },{}],"8lqZg":[function(require,module,exports) {
 var _functionsJs = require("./scripts/functions.js");
+localStorage.clear();
 const arrow = document.querySelector(".arrow");
 const dropBtn = document.querySelector(".dropdown__dropbtn");
 const dropList = document.querySelector(".dropdown__content");
@@ -592,6 +593,7 @@ const searchField = document.querySelector(".search-field");
 const columns = document.querySelector(".columns");
 const report = document.querySelector(".report");
 const cancel = document.querySelector(".cancel");
+const sendReport = document.querySelector(".send");
 let cardData;
 fetch("https://6646535251e227f23aae9ab7.mockapi.io/v1/posts").then((response)=>response.json()).then((response)=>{
     response.forEach((item)=>{
@@ -624,6 +626,9 @@ searchField.addEventListener("input", (event)=>{
 });
 cancel.addEventListener("click", ()=>{
     report.classList.remove("flex");
+});
+sendReport.addEventListener("click", (event)=>{
+    (0, _functionsJs.hideCard)(event);
 }) // report.addEventListener('click', () => {
  //   report.classList.remove('flex')
  // })
@@ -637,6 +642,7 @@ parcelHelpers.export(exports, "showModal", ()=>showModal);
 parcelHelpers.export(exports, "showReport", ()=>showReport);
 parcelHelpers.export(exports, "search", ()=>search);
 parcelHelpers.export(exports, "saveData", ()=>saveData);
+parcelHelpers.export(exports, "hideCard", ()=>hideCard);
 function createCard(id, image, avatar, hashtag, columns) {
     const card = document.createElement("figure");
     card.classList.add("columns__item");
@@ -699,8 +705,8 @@ function aspectRatio(id, card) {
     if (id % 3 === 0) img.classList.add("three");
     else img.classList.add("one");
 }
-function search(event, columns, cardData) {
-    const searchedText = event.target.value;
+function search(event1, columns, cardData) {
+    const searchedText = event1.target.value;
     cardData = Object.values(cardData);
     const searchedCards = cardData.filter((card)=>{
         return card.hashtag.includes(searchedText);
@@ -711,9 +717,9 @@ function search(event, columns, cardData) {
         showFilteredCards(card, columns);
     });
 }
-function saveData(event) {
-    const boardId = event.target.id;
-    const currentId = event.target.parentElement.parentElement.parentElement.id.split("-").at(-1);
+function saveData(event1) {
+    const boardId = event1.target.id;
+    const currentId = event1.target.parentElement.parentElement.parentElement.id.split("-").at(-1);
     const currentImg = document.getElementById(`img-${currentId}`).src;
     const currentAva = document.getElementById(`ava-${currentId}`).src;
     const currentHashtag = document.getElementById(`hashtag-${currentId}`).innerText;
@@ -723,8 +729,8 @@ function saveData(event) {
         ava: currentAva,
         hashtag: currentHashtag
     };
-    debugger;
     const data = localStorage.getItem(`${boardId}`);
+    debugger;
     if (!data) localStorage.setItem(`${boardId}`, JSON.stringify([
         data
     ]));
@@ -733,6 +739,9 @@ function saveData(event) {
         result.push(cardData);
         localStorage.setItem(`${boardId}`, JSON.stringify(result));
     }
+}
+function hideCard() {
+    console.log(event.target);
 }
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gkKU3":[function(require,module,exports) {

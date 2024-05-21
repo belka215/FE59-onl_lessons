@@ -3,16 +3,20 @@ import {
   createCard,
   search,
   showReport,
-  saveData
+  saveData,
+  hideCard
 } from "./scripts/functions.js";
 
+
+localStorage.clear()
 const arrow = document.querySelector('.arrow');
 const dropBtn = document.querySelector('.dropdown__dropbtn');
 const dropList = document.querySelector('.dropdown__content')
 const searchField = document.querySelector('.search-field')
 const columns = document.querySelector(".columns")
 const report = document.querySelector('.report');
-const cancel = document.querySelector('.cancel')
+const cancel = document.querySelector('.cancel');
+const sendReport = document.querySelector('.send');
 let cardData;
 
 fetch('https://6646535251e227f23aae9ab7.mockapi.io/v1/posts')
@@ -62,6 +66,10 @@ searchField.addEventListener('input', (event) => {
 
 cancel.addEventListener('click', () => {
   report.classList.remove('flex')
+})
+
+sendReport.addEventListener('click', (event) => {
+  hideCard(event)
 })
 
 // report.addEventListener('click', () => {

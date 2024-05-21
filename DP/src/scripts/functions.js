@@ -98,9 +98,9 @@ export function saveData(event) {
         ava: currentAva,
         hashtag: currentHashtag
     }
-    debugger
 
     const data = localStorage.getItem(`${boardId}`);
+    debugger
     if (!data) {
         localStorage.setItem(`${boardId}`, JSON.stringify([data]))
     } else {
@@ -108,7 +108,9 @@ export function saveData(event) {
         result.push(cardData);
         localStorage.setItem(`${boardId}`, JSON.stringify(result));
     }
+}
 
-    
+export function hideCard() {
+    console.log(event.target)
 }
 
