@@ -586,12 +586,12 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
 },{}],"8lqZg":[function(require,module,exports) {
 var _functionsJs = require("./scripts/functions.js");
 localStorage.clear();
-const arrow = document.querySelector(".arrow");
+const arrow = document.querySelector(".dropdown__dropbtn__arrow");
 const dropBtn = document.querySelector(".dropdown__dropbtn");
 const dropList = document.querySelector(".dropdown__content");
 const searchField = document.querySelector(".search-field");
 const columns = document.querySelector(".columns");
-const report = document.querySelector(".report");
+const report = document.querySelector(".report-background");
 const cancel = document.querySelector(".cancel");
 const sendReport = document.querySelector(".send");
 let cardData;
@@ -629,10 +629,10 @@ cancel.addEventListener("click", ()=>{
 });
 sendReport.addEventListener("click", (event)=>{
     (0, _functionsJs.hideCard)(event);
-}) // report.addEventListener('click', () => {
- //   report.classList.remove('flex')
- // })
-;
+});
+report.addEventListener("click", ()=>{
+    report.classList.remove("flex");
+});
 
 },{"./scripts/functions.js":"kfKzI"}],"kfKzI":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");

@@ -340,7 +340,7 @@
     }
 }
 
-.report {
+.report-background {
     display: none;
     justify-content: center;
     align-items: center;
@@ -351,53 +351,54 @@
     left: 0;
     background-color: rgba(0, 0, 0, 0.74);
     z-index: 5;
+}
 
-    &__content {
-        width: 35%;
-        padding: 30px;
-        background-color: white;
-        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-        border-radius: 24px;
+.report__content {
+    width: 35%;
+    padding: 30px;
+    background-color: white;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    border-radius: 24px;
 
-        @media(max-width: 1200px){
-            width: 50%;
-        }
+    @media(max-width: 1200px) {
+        width: 50%;
+    }
 
-        @media(max-width: 800px){
-            width: 70%;
-        }
+    @media(max-width: 800px) {
+        width: 70%;
+    }
 
-        @media(max-width: 550px){
-            width: 90%;
-        }
+    @media(max-width: 550px) {
+        width: 90%;
+    }
 
-        &__title {
-            margin-bottom: 20px;
-            text-align: center;
-            font-family: "Segoe UI";
-            font-size: 22px;
-            font-weight: 700;
-            color: black;
-        }
+    &__title {
+        margin-bottom: 20px;
+        text-align: center;
+        font-family: "Segoe UI";
+        font-size: 22px;
+        font-weight: 700;
+        color: black;
+    }
 
-        &__reasons {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            font-family: "Segoe UI";
-            font-size: 17px;
-            font-weight: 500;
-            color: rgb(60, 60, 60);
-        }
+    &__reasons {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        font-family: "Segoe UI";
+        font-size: 17px;
+        font-weight: 500;
+        color: rgb(60, 60, 60);
+    }
 
-        &__btns {
-            display: flex;
-            justify-content: end;
-            gap: 10px;
-            margin-top: 5%;
-        }
+    &__btns {
+        display: flex;
+        justify-content: end;
+        gap: 10px;
+        margin-top: 5%;
     }
 }
+
 
 .cancel {
     padding: 10px;

@@ -9,12 +9,12 @@ import {
 
 
 localStorage.clear()
-const arrow = document.querySelector('.arrow');
+const arrow = document.querySelector('.dropdown__dropbtn__arrow');
 const dropBtn = document.querySelector('.dropdown__dropbtn');
 const dropList = document.querySelector('.dropdown__content')
 const searchField = document.querySelector('.search-field')
 const columns = document.querySelector(".columns")
-const report = document.querySelector('.report');
+const report = document.querySelector('.report-background');
 const cancel = document.querySelector('.cancel');
 const sendReport = document.querySelector('.send');
 let cardData;
@@ -72,9 +72,9 @@ sendReport.addEventListener('click', (event) => {
   hideCard(event)
 })
 
-// report.addEventListener('click', () => {
-//   report.classList.remove('flex')
-// })
+report.addEventListener('click', () => {
+  report.classList.remove('flex')
+})
 
 
 
