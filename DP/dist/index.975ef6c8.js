@@ -663,7 +663,9 @@ function createCard(id, image, avatar, hashtag, columns) {
     aspectRatio(id, card);
 }
 function showModal(currentCard) {
-    const modal = document.createElement("div");
+    let modal = document.querySelector(".modal");
+    if (modal) modal.remove();
+    modal = document.createElement("div");
     modal.classList.add("modal");
     modal.id = "modal";
     modal.innerHTML = `
@@ -678,6 +680,8 @@ function showModal(currentCard) {
     currentCard.append(modal);
 }
 function showReport(report) {
+    const modal = document.querySelector(".modal");
+    if (modal) modal.remove();
     report.classList.add("flex");
 }
 function showFilteredCards({ id, image, avatar, hashtag }, columns) {
@@ -711,7 +715,6 @@ function search(event1, columns, cardData) {
     const searchedCards = cardData.filter((card)=>{
         return card.hashtag.includes(searchedText);
     });
-    console.log(searchedCards);
     columns.innerHTML = "";
     searchedCards.forEach((card)=>{
         showFilteredCards(card, columns);

@@ -19,7 +19,11 @@ export function createCard(id, image, avatar, hashtag, columns) {
 }
 
 export function showModal(currentCard) {
-    const modal = document.createElement('div');
+    let modal = document.querySelector('.modal');
+    if(modal) {
+        modal.remove();
+    }
+    modal = document.createElement('div');
     modal.classList.add('modal');
     modal.id = 'modal';
     modal.innerHTML = `
@@ -35,6 +39,10 @@ export function showModal(currentCard) {
 }
 
 export function showReport(report) {
+    const modal = document.querySelector('.modal');
+    if(modal) {
+        modal.remove();
+    }
     report.classList.add('flex')
 }
 
@@ -77,7 +85,6 @@ export function search(event, columns, cardData) {
     const searchedCards = cardData.filter(card => {
         return card.hashtag.includes(searchedText);
     })
-    console.log(searchedCards)
     columns.innerHTML = '';
 
     searchedCards.forEach(card => {
