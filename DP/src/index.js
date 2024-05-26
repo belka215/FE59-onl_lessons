@@ -7,8 +7,6 @@ import {
   hideCard
 } from "./scripts/functions.js";
 
-
-localStorage.clear()
 const arrow = document.querySelector('.dropdown__dropbtn__arrow');
 const dropBtn = document.querySelector('.dropdown__dropbtn');
 const dropList = document.querySelector('.dropdown__content')

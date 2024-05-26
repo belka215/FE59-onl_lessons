@@ -33,16 +33,15 @@
 
 // trafficLights();
 
-const direction = ["Begin on Road A","Right on Road B","Right on Road C","Left on Road D"];
+// function minStringLength(array) {
 
-function reverseDir (direction) {
-  direction.forEach(dir => {
-    const letter = dir.split(' ').at(-1);
-    return letter
-  })
-  const arrayL = [];
-    arrayL.push(letter)
-    console.log(arrayL)
-}
+//   const lengths = array.map(wordLength => wordLength.length);
+//   const min = Math.min(...lengths)
+//   console.log(min)
+//   }
 
-reverseDir(direction)
+
+
+// const array = ['fjfjfhj', 'kjnfvlskjhu']
+// minStringLength(array)
+

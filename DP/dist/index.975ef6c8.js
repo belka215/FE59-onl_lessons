@@ -585,7 +585,6 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
 
 },{}],"8lqZg":[function(require,module,exports) {
 var _functionsJs = require("./scripts/functions.js");
-localStorage.clear();
 const arrow = document.querySelector(".dropdown__dropbtn__arrow");
 const dropBtn = document.querySelector(".dropdown__dropbtn");
 const dropList = document.querySelector(".dropdown__content");
