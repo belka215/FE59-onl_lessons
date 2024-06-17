@@ -12,9 +12,9 @@ export const Posts = ({ posts }) => {
                 {posts.map(post => {
                     if (post.id === 1) {
                         return <Large post={post} />
-                    } else if (post.id === 2) {
+                    } else if (post.id % 2 === 0) {
                         return <Medium post={post} />
-                    } else if (post.id === 4) {
+                    } else if (post.id % 3 === 0) {
                         return <Small post={post} />
                     }
                 })}
