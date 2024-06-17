@@ -1,0 +1,6 @@
+.wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 700px);
+    grid-template-rows: auto auto;
+    grid-auto-flow: row dense;
+}

@@ -1,0 +1,47 @@
+.large-container {
+    margin: 20px auto;
+    padding: 20px;
+    width: 700px;
+    background-color: rgba(255, 243, 227, 0.462);
+}
+
+.content {
+    display: flex;
+    
+
+    &__left {
+        width: 50%;
+        padding-right: 20px;
+    }
+
+    &__right {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 50%;
+    }
+}
+
+.img_large {
+    object-fit: contain;
+    width: 100%;
+    height: auto;
+    border-radius: 15px;
+}
+
+.icons {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+    padding-bottom: 30px;
+    border-bottom: solid 2px rgba(128, 128, 128, 0.541);
+
+    &__left {
+        display: flex;
+        gap: 15px;
+    }
+
+    &__right {
+        display: flex;
+    }
+}
