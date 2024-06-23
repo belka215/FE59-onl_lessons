@@ -1,0 +1,14 @@
+.footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+
+    &-wrapper {
+        display: flex;
+        justify-content: space-between;
+        margin: 0 auto;
+        width: 60vw;
+        padding: 25px 0;
+        border-top: solid 2px rgb(190, 190, 190);
+    }
+}

@@ -1,0 +1,89 @@
+.detailed-post {
+    &__container {
+        display: flex;
+        flex-direction: column;
+        align-content: space-between;
+        gap: 30px;
+        margin: 30px 0 50px 0;
+
+        img {
+            margin: 0 auto;
+            width: 70%;
+            object-fit: contain;
+        }
+    }
+
+    &__title {
+        margin: 0 auto;
+        width: 70%;
+        text-align: center;
+        font-size: 32px;
+    }
+
+    &__text {
+        margin: 0 auto;
+        width: 70%;
+        font-size: 20px;
+        text-indent: 30px;
+    }
+
+    &__actions {
+        display: flex;
+        justify-content: space-between;
+        margin: 0 auto;
+        width: 70%;
+    }
+
+    &__like,
+    &__save {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+    }
+}
+
+.post__add {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 7px 15px;
+    border-radius: 3px;
+    background-color: rgba(191, 181, 197, 0.322);
+    transition: .3s;
+
+    &:hover {
+        background-color: rgba(184, 161, 197, 0.322);
+    }
+
+    img {
+        width: 20px;
+    }
+}
+
+.pagination {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+
+    &__prev-button,
+    &__next-button {
+        padding-top: 10px;
+        border-top: solid 2px rgb(190, 190, 190);
+    }
+}
+
+.prev,
+.next {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 0 5px;
+    min-width: 145px;
+
+    img {
+        width: 25px;
+    }
+}

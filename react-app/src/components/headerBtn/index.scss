@@ -1,0 +1,41 @@
+.header-btn {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 15px 15px;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    transition: 0.3s ease-out;
+
+    img {
+        margin-left: 5px;
+    }
+
+    &:hover {
+        background-color: rgb(71, 31, 137);
+    }
+
+    &:focus {
+        background-color: rgb(71, 31, 137);
+    }
+
+    &:after {
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 0;
+        height: 3px;
+        background-color: white;
+        content: "";
+        transition: width 0.3s ease-out;
+    }
+
+    &:hover:after,
+    &:focus:after {
+        width: 100%;
+    }
+}
