@@ -28,12 +28,6 @@
   a {
     text-decoration: none;
     color: inherit;
-    transition: 0.3s ease-out;
-
-    &:hover {
-      color: rgb(45, 0, 118);
-      text-decoration: underline rgb(45, 0, 118);
-    }
   }
 
   body {

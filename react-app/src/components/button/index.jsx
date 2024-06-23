@@ -12,6 +12,8 @@ export const Button = ({ setPage, setIsShowModal, values, children }) => {
         } else if (children === 'Go to Home') {
             setPage('allPosts');
             setIsShowModal(false);
+        } else if (children === 'Sign Up') {
+            setPage('emailConfirmed')
         }
     }
 

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button } from "../button";
 import styles from "./index.scss";
 
-export const SignIn = ({ setIsShowModal }) => {
+export const SignIn = ({ setPage, setIsShowModal }) => {
     const [values, setValues] = useState({});
 
     const handleChangeEmail = (event) => {
@@ -16,7 +16,7 @@ export const SignIn = ({ setIsShowModal }) => {
     return (
         <section className="sign-in">
             <div className="wrapper">
-                <button className="home-btn">Back to home</button>
+                <button className="btn_underline" onClick={() => setPage('allPosts')}>Back to home</button>
                 <h2 className="sign-in__title">Sign In</h2>
                 <div className="form-container">
                     <div className="sign-in__form">
@@ -36,13 +36,14 @@ export const SignIn = ({ setIsShowModal }) => {
                             onChange={handleChangePass}
                             required
                         />
-                        <a href="#">Forgot password?</a>
+                        <button className="btn_underline wid">Forgot password?</button>
                         <Button
                             setIsShowModal={setIsShowModal}
                             values={values}
-                        >Sign In</Button>
+                        >
+                            Sign In</Button>
                         <div className="sign-up-container">
-                            <p>Don't have an account? <a href="#">Sign up</a>.</p>
+                            <p>Don't have an account? <button onClick={() => setPage('signUp')} href="#" className="btn_underline">Sign up</button>.</p>
                         </div>
                     </div>
                 </div>

@@ -3,8 +3,10 @@ import { Header } from "../header";
 import { SignIn } from "../signIn";
 import { AllPosts } from "../allPosts";
 import { Success } from "../success";
+import { SignUp } from "../signUp";
 import { Footer } from "../footer";
 import styles from "./index.scss";
+import { EmailConfirmed } from "../emailConfirmed";
 
 
 export const App = () => {
@@ -15,9 +17,10 @@ export const App = () => {
         <>
             <Header setPage={setPage} />
             <body>
-                {page === "signIn" && <SignIn setIsShowModal={setIsShowModal} />}
+                {page === "signIn" && <SignIn setPage={setPage} setIsShowModal={setIsShowModal} />}
                 {page === "allPosts" && <AllPosts />}
-
+                {page === "signUp" && <SignUp setPage={setPage} setIsShowModal={setIsShowModal} />} 
+                {page === "emailConfirmed" && <EmailConfirmed setPage={setPage} setIsShowModal={setIsShowModal} />}
                 <Footer />
             </body>
             {isShowModal && <Success setPage={setPage} setIsShowModal={setIsShowModal} />}

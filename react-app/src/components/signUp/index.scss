@@ -1,0 +1,24 @@
+.sign-up {
+    width: 100vw;
+    min-height: calc(100vh - 74px);
+
+    &__title {
+        margin: 20px 0;
+        font-size: 42px;
+    }
+
+    &__form {
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+        padding: 20px;
+        border: solid 2px rgb(190, 190, 190);
+        font-size: 18px;
+    }
+
+    &__container {
+        display: flex;
+        justify-content: center;
+        padding-top: 10px;
+    }
+}
