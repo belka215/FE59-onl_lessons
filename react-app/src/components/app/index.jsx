@@ -1,29 +1,45 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Header } from "../header";
 import { SignIn } from "../signIn";
 import { AllPosts } from "../allPosts";
+import { PostDetailed } from "../post-details";
 import { Success } from "../success";
 import { SignUp } from "../signUp";
-import { Footer } from "../footer";
-import styles from "./index.scss";
 import { EmailConfirmed } from "../emailConfirmed";
-
+import { Footer } from "../footer";
+import { NotFound } from "../not-found/index.jsx";
+import { MyContext } from "../hooks/context.hook.jsx";
+import styles from "./index.scss";
 
 export const App = () => {
-    const [page, setPage] = useState('allPosts');
     const [isShowModal, setIsShowModal] = useState(false);
+    const [isDarkTheme, setIsDarkTheme] = useState(false);
+    const [searchValue, setSearchValue] = useState('');
+
+    function handleInputSearch(event) {
+        setSearchValue(event.target.value)
+        console.log(searchValue)
+    }
 
     return (
-        <>
-            <Header setPage={setPage} />
-            <body>
-                {page === "signIn" && <SignIn setPage={setPage} setIsShowModal={setIsShowModal} />}
-                {page === "allPosts" && <AllPosts />}
-                {page === "signUp" && <SignUp setPage={setPage} setIsShowModal={setIsShowModal} />} 
-                {page === "emailConfirmed" && <EmailConfirmed setPage={setPage} setIsShowModal={setIsShowModal} />}
-                <Footer />
-            </body>
-            {isShowModal && <Success setPage={setPage} setIsShowModal={setIsShowModal} />}
-        </>
+        <BrowserRouter>
+            <MyContext.Provider value={isDarkTheme}>
+                <Header setIsDarkTheme={setIsDarkTheme} handleInputSearch={handleInputSearch} />
+                <main className={isDarkTheme ? "dark-theme" : ''}>
+                    <Routes>
+                        <Route path="blog" element={<AllPosts searchValue={searchValue} />} />
+                        <Route path="/blog/:postId" element={<PostDetailed />} />
+                        <Route path="sign-in" element={<SignIn setIsShowModal={setIsShowModal} />} />
+                        <Route path="sign-up" element={<SignUp setIsShowModal={setIsShowModal} />} />
+                        <Route path="email-confirmed" element={<EmailConfirmed setIsShowModal={setIsShowModal} />} />
+                        <Route path="*" element={<NotFound />} />
+                    </Routes>
+                    <Footer />
+                </main>
+                {isShowModal && <Success setIsShowModal={setIsShowModal} />}
+            </MyContext.Provider>
+        </BrowserRouter>
+
     )
 }

@@ -1,4 +1,6 @@
 .footer {
+    $self: &;
+
     position: relative;
     bottom: 0;
     width: 100%;
@@ -11,4 +13,12 @@
         padding: 25px 0;
         border-top: solid 2px rgb(190, 190, 190);
     }
+
+    &_dark {
+        #{$self}-wrapper {
+            border-top: solid 2px rgb(83, 36, 160);
+            color: white;
+        }
+    }
+
 }

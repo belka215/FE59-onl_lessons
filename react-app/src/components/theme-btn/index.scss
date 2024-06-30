@@ -1,0 +1,15 @@
+.theme-btn {
+    position: absolute;
+    right: 3%;
+    bottom: -100%;
+    cursor: pointer;
+
+    img {
+        width: 40px;
+        transition: .3s;
+    }
+
+    &:hover img {
+        transform: scale(1.1);
+    }
+}

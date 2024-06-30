@@ -1,20 +1,67 @@
 .posts {
-  margin-bottom: 4%;  
-    &__title {
-      margin-bottom: 20px;
-      font-size: 35px;
-    }
-  
-    &__wrapper {
-      display: grid;
-      grid-gap: 10px;
-      grid-template-areas:
-        "post-0 post-0 post-5"
-        "post-0 post-0 post-6"
-        "post-1 post-2 post-7"
-        "post-1 post-2 post-8"
-        "post-3 post-4 post-9"
-        "post-3 post-4 post-10";
-      grid-template-columns: 1fr 1fr 1fr;
+  $self: &;
+
+  &__title {
+    margin-bottom: 20px;
+    font-size: 35px;
+  }
+
+  &__wrapper {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-areas:
+      "post-0 post-0 post-5"
+      "post-0 post-0 post-6"
+      "post-1 post-2 post-7"
+      "post-1 post-2 post-8"
+      "post-3 post-4 post-9"
+      "post-3 post-4 post-10";
+    grid-template-columns: 1fr 1fr 1fr;
+
+    &_flex {
+      display: flex;
     }
   }
+
+  &_dark {
+    #{$self}__title {
+      color: white;
+    }
+  }
+}
+
+.btns {
+  $self: &;
+  border-bottom: solid 2px rgb(190, 190, 190);
+  margin-bottom: 20px;
+
+  &__item {
+    position: relative;
+    min-width: 100px;
+    padding: 10px 15px;
+    font-size: 18px;
+
+    &:after {
+      display: block;
+      position: absolute;
+      left: 0;
+      bottom: -2px;
+      width: 0;
+      height: 3px;
+      background-color: rgb(83, 36, 160);
+      content: "";
+      transition: width 0.3s ease-out;
+    }
+
+    &:hover:after,
+    &:focus:after {
+      width: 100%;
+    }
+  }
+
+  &_dark {
+    #{$self}__item {
+      color: white;
+    }
+  }
+}

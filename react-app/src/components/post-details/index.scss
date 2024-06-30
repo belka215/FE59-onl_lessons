@@ -1,8 +1,9 @@
 .detailed-post {
+    $self: &;
+
     &__container {
         display: flex;
         flex-direction: column;
-        align-content: space-between;
         gap: 30px;
         margin: 30px 0 50px 0;
 
@@ -41,6 +42,14 @@
         align-items: center;
         gap: 10px;
     }
+
+    &_dark {
+
+        #{$self}__title,
+        #{$self}__text {
+            color: white;
+        }
+    }
 }
 
 .post__add {
@@ -69,9 +78,19 @@
 
     &__prev-button,
     &__next-button {
-        padding-top: 10px;
+        padding: 10px 5px;
         border-top: solid 2px rgb(190, 190, 190);
+
+        &_dark {
+            background-color: rgba(191, 181, 197, 0.322);
+            border-radius: 3px;
+        }
     }
+}
+
+.pagination__next-button_dark {
+    background-color: rgba(191, 181, 197, 0.322);
+    border-radius: 3px;
 }
 
 .prev,

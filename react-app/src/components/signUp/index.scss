@@ -1,4 +1,6 @@
 .sign-up {
+    $self: &;
+
     width: 100vw;
     min-height: calc(100vh - 74px);
 
@@ -20,5 +22,19 @@
         display: flex;
         justify-content: center;
         padding-top: 10px;
+    }
+
+    &_dark {
+        width: 100vw;
+        min-height: calc(100vh - 74px);
+
+        #{$self}__title {
+            color: white;
+        }
+
+        #{$self}__form {
+            background-color: rgb(26, 26, 26);
+            border: solid 2px rgb(83, 36, 160);
+        }
     }
 }

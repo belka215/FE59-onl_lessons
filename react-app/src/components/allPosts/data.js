@@ -7,6 +7,8 @@ export const postsData = [
       lesson_num: 1,
       title: "Хакеры могут подобрать почти половину паролей в даркнете за минуту",
       author: 4,
+      favorite: false,
+      popular: true,
     },
     {
       id: 2,
@@ -16,6 +18,8 @@ export const postsData = [
       lesson_num: 1,
       title: "В ЕС хотят сканировать любую переписку, даже зашифрованную",
       author: 5,
+      favorite: true,
+      popular: true,
     },
     {
       id: 3,
@@ -25,6 +29,8 @@ export const postsData = [
       lesson_num: 1,
       title: "Беларус поменял права на польские. В каршеринге на родине его ждал сюрприз",
       author: 3,
+      favorite: false,
+      popular: false,
     },
     {
       id: 4,
@@ -34,6 +40,8 @@ export const postsData = [
       lesson_num: 1,
       title: "В каких ИТ-профессиях реже всего требуют диплом?",
       author: 4,
+      favorite: false,
+      popular: true,
     },
     {
       id: 5,
@@ -43,6 +51,8 @@ export const postsData = [
       lesson_num: 1,
       title: "«Атмосферу портят немецкие законы». Айтишники на Евро-2024 — во сколько обошлось и что удивило",
       author: 5,
+      favorite: true,
+      popular: false,
     },
     {
       id: 6,
@@ -52,6 +62,8 @@ export const postsData = [
       lesson_num: 1,
       title: "8 вопросов специалисту про карьеру в ML: все про стек, собесы, рост в профессии и как туда свитчнуться",
       author: 3,
+      favorite: false,
+      popular: false,
     },
     {
       id: 7,
@@ -61,6 +73,8 @@ export const postsData = [
       lesson_num: 1,
       title: "Shadow Lead и другие. Чем айтишники занимаются в тени",
       author: 4,
+      favorite: true,
+      popular: true,
     },
     {
       id: 8,
@@ -70,6 +84,8 @@ export const postsData = [
       lesson_num: 1,
       title: "Хакеры взломали Apple, украли код внутренних инструментов",
       author: 5,
+      favorite: true,
+      popular: false,
     },
     {
       id: 9,
@@ -79,6 +95,8 @@ export const postsData = [
       lesson_num: 1,
       title: "Youtube отменяет дешевые подписки, купленные с помощью VPN",
       author: 3,
+      favorite: false,
+      popular: true,
     },
     {
       id: 10,
@@ -88,6 +106,8 @@ export const postsData = [
       lesson_num: 1,
       title: "Anthropic выпустила Claude 3.5 Sonnet — ИИ-модель опережает GPT-4o и Gemini",
       author: 5,
+      favorite: true,
+      popular: true,
     },
     {
       id: 11,
@@ -97,5 +117,7 @@ export const postsData = [
       lesson_num: 1,
       title: "Dell: «Никаких повышений для удалёнщиков». Половина сотрудников: «ОK»",
       author: 3,
+      favorite: false,
+      popular: false,
     },
   ];

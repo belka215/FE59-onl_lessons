@@ -1,6 +1,8 @@
 .email-confirmed {
+    $self: &;
+
     width: 100vw;
-    min-height: calc(100vh - 74px); 
+    min-height: calc(100vh - 74px);
 
     &__title {
         margin: 20px 0;
@@ -19,5 +21,20 @@
 
     &__text {
         font-size: 20px;
+    }
+
+    &_dark {
+        width: 100vw;
+        min-height: calc(100vh - 74px);
+
+        #{$self}__title,
+        #{$self}__text {
+            color: white;
+        }
+
+        #{$self}__content {
+            background-color: rgb(26, 26, 26);
+            border: solid 2px rgb(83, 36, 160);
+        }
     }
 }

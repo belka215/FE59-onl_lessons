@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Button } from "../button";
 import styles from "./index.scss";
+import { MyContext } from "../hooks/context.hook";
+import { Link } from "react-router-dom";
 
-export const SignIn = ({ setPage, setIsShowModal }) => {
+export const SignIn = ({ setIsShowModal }) => {
     const [values, setValues] = useState({});
+    const isDarkTheme = useContext(MyContext);
 
     const handleChangeEmail = (event) => {
         setValues((prevState) => ({ ...prevState, email: event.target.value }))
@@ -14,36 +17,40 @@ export const SignIn = ({ setPage, setIsShowModal }) => {
     }
 
     return (
-        <section className="sign-in">
+        <section className={isDarkTheme ? "sign-in_dark" : "sign-in"}>
             <div className="wrapper">
-                <button className="btn_underline" onClick={() => setPage('allPosts')}>Back to home</button>
+                <Link to="/blog" className={`btn_underline ${isDarkTheme ? "btn_underline_dark" : ""}`}>Back to home</Link>
                 <h2 className="sign-in__title">Sign In</h2>
                 <div className="form-container">
                     <div className="sign-in__form">
-                        <label htmlFor="email" className="label"><b>Email</b></label>
+                        <label htmlFor="email" className={`label ${isDarkTheme ? "label_dark" : ""}`}><b>Email</b></label>
                         <input
+                            className={`input ${isDarkTheme ? "input_dark" : ""}`}
                             type="text"
                             placeholder="Your Email"
-                            name="email" className="input"
+                            name="email"
                             onChange={handleChangeEmail}
                             required
                         />
-                        <label htmlFor="psw" className="label"><b>Password</b></label>
+                        <label htmlFor="psw" className={`label ${isDarkTheme ? "label_dark" : ""}`}><b>Password</b></label>
                         <input
+                            className={`input ${isDarkTheme ? "input_dark" : ""}`}
                             type="password"
                             placeholder="Your Password"
-                            name="psw" className="input"
+                            name="psw"
                             onChange={handleChangePass}
                             required
                         />
-                        <button className="btn_underline wid">Forgot password?</button>
+                        <button className={`btn_underline wid ${isDarkTheme ? "btn_underline_dark" : ""}`}>Forgot password?</button>
                         <Button
                             setIsShowModal={setIsShowModal}
                             values={values}
                         >
                             Sign In</Button>
                         <div className="sign-up-container">
-                            <p>Don't have an account? <button onClick={() => setPage('signUp')} href="#" className="btn_underline">Sign up</button>.</p>
+                            <p className={isDarkTheme ? "text_dark" : ''}>Don't have an account?
+                                <Link to="/sign-up" className={`btn_underline ${isDarkTheme ? "btn_underline_dark" : ""}`}> Sign up</Link>.
+                            </p>
                         </div>
                     </div>
                 </div>

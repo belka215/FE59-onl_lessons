@@ -1,6 +1,6 @@
 import styles from "./index.scss";
 
-export const Button = ({ setPage, setIsShowModal, values, children }) => {
+export const Button = ({ setIsShowModal, values, children }) => {
     const handleSignIn = () => {
         console.log("Отправляем все данные в values на сервер: ", values)
     }
@@ -10,10 +10,7 @@ export const Button = ({ setPage, setIsShowModal, values, children }) => {
             setIsShowModal(true);
             handleSignIn();
         } else if (children === 'Go to Home') {
-            setPage('allPosts');
             setIsShowModal(false);
-        } else if (children === 'Sign Up') {
-            setPage('emailConfirmed')
         }
     }
 

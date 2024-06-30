@@ -1,0 +1,19 @@
+.not-found {
+    padding: 5% 0;
+
+    &__container {
+        margin: 0 auto;
+        width: fit-content;
+
+        img {
+            
+        }
+    }
+
+    &__title {
+        margin-bottom: 10px;
+        text-align: center;
+        font-size: 35px;
+        font-weight: normal;
+    }
+}
