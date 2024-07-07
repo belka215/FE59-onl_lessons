@@ -1,11 +1,11 @@
-import { useContext } from "react";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { Button } from "../button";
 import styles from "./index.scss";
-import { MyContext } from "../hooks/context.hook";
-import { Link } from "react-router-dom";
 
 export const SignUp = ({ setIsShowModal }) => {
-    const isDarkTheme = useContext(MyContext)
+    const isDarkTheme = useSelector(state => state.isDarkTheme);
+    
     return (
         <section className={isDarkTheme ? "sign-up_dark" : "sign-up"}>
             <div className="wrapper">

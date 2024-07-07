@@ -3,21 +3,17 @@ import { ThemeBtn } from "../theme-btn";
 import search from "../img/search.png";
 import panda from "../img/panda.png";
 import styles from "./index.scss";
-import { useState } from "react";
 
-export const Header = ({ setIsDarkTheme, handleInputSearch }) => {
-    function handleThemeChange() {
-        setIsDarkTheme((prevStat) => !prevStat)
-    }
+export const Header = ({ handleInputSearch }) => {
 
     return (
         <header className="header">
             <div className="container">
                 <div className="header__left">
-                    <Link to="/blog" className="header__left__logo">
+                    <Link to="/" className="header__left__logo">
                         <img src={panda} />
                     </Link>
-                    <Link to="/blog" className="header-btn">
+                    <Link to="/blog/all" className="header-btn">
                         Blog
                     </Link>
                 </div>
@@ -34,7 +30,7 @@ export const Header = ({ setIsDarkTheme, handleInputSearch }) => {
                     <Link to="/sign-in" className="header-btn">
                         Sign In
                     </Link>
-                    <ThemeBtn handleThemeChange={handleThemeChange} />
+                    <ThemeBtn />
                 </div>
             </div>
         </header>

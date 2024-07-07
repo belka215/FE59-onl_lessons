@@ -1,32 +1,59 @@
-import { useContext, useState } from "react";
-import { MyContext } from "../hooks/context.hook";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+import { addPostsAction, changeTabAction } from "../../actions";
 import { Post } from "../post";
 import { postsData } from "./data";
+import { ImgModal } from "../img-modal";
+import { Spinner } from "../spinner";
 import styles from "./index.scss";
-import { useNavigate } from "react-router-dom";
 
 export const AllPosts = ({ searchValue }) => {
-    const [filterValue, setFilterValue] = useState('all');
-    const isDarkTheme = useContext(MyContext);
+    const { category } = useParams();
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const isDarkTheme = useSelector(state => state.isDarkTheme);
+    const img = useSelector(state => state.img);
+    const posts = useSelector((state) => state.posts)
+    const filterValue = useSelector((state) => state.tab)
+    console.log(category)
 
-    const navigate = useNavigate()
+    useEffect(() => {
+        dispatch(changeTabAction(category));
 
-    // const handleFavoritesClick = () => {
-    //     setFilterValue("favorites");
-    //     navigate('/blog/favorites', { replace: true });
-    // }
+        fetch("https://studapi.teachmeskills.by/blog/posts/?limit=11")
+            .then((response) => response.json())
+            .then(({ results }) => {
+                dispatch(addPostsAction(postsData));
+            })
+            .catch((e) => console.log(e));
+    }, []);
+
+    const handleClickTab = (category) => {
+        return () => {
+            dispatch(changeTabAction(category));
+            navigate(`/blog/${category}`)
+        }
+    }
+
+    if (!posts) {
+        return <Spinner />
+    }
 
     return (
         <section className={isDarkTheme ? "posts_dark" : "posts"}>
             <div className="wrapper">
                 <h1 className="posts__title">{searchValue ? `Search results for "${searchValue}"` : "Blog"}</h1>
                 <div className={`btns ${isDarkTheme ? "btns_dark" : ''}`}>
-                    <button className="btns__item" onClick={() => setFilterValue("all")}>All</button>
-                    <button className="btns__item" onClick={() => setFilterValue("favorites")}>My Favorites</button>
-                    <button className="btns__item" onClick={() => setFilterValue("popular")}>Popular</button>
+                    <button className="btns__item" onClick={handleClickTab("all")}>All</button>
+                    <button className="btns__item" onClick={handleClickTab("favorites")}>My Favorites</button>
+                    <button className="btns__item" onClick={handleClickTab("popular")}>Popular</button>
                 </div>
                 <div className={filterValue === "all" ? "posts__wrapper" : "posts_wrapper_flex"}>
-                    {postsData
+                    {posts
+                        // .reduce((result, post) => {
+
+                        // }, [])
                         .filter((post) => {
                             if (filterValue === "all") {
                                 return post;
@@ -63,6 +90,7 @@ export const AllPosts = ({ searchValue }) => {
                     }
                 </div>
             </div>
+            {img && <ImgModal img={img} />}
         </section>
     );
 };

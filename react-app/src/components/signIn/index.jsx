@@ -1,12 +1,12 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { Button } from "../button";
 import styles from "./index.scss";
-import { MyContext } from "../hooks/context.hook";
-import { Link } from "react-router-dom";
 
 export const SignIn = ({ setIsShowModal }) => {
     const [values, setValues] = useState({});
-    const isDarkTheme = useContext(MyContext);
+    const isDarkTheme = useSelector(state => state.isDarkTheme);
 
     const handleChangeEmail = (event) => {
         setValues((prevState) => ({ ...prevState, email: event.target.value }))

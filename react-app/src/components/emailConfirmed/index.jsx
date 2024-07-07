@@ -1,11 +1,10 @@
-import { useContext } from "react";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { Button } from "../button";
 import styles from "./index.scss";
-import { MyContext } from "../hooks/context.hook";
-import { Link } from "react-router-dom";
 
 export const EmailConfirmed = ({ setIsShowModal }) => {
-    const isDarkTheme = useContext(MyContext)
+    const isDarkTheme = useSelector(state => state.isDarkTheme);
     return (
         <section className={isDarkTheme ? "email-confirmed_dark" : "email-confirmed"}>
             <div className="wrapper">

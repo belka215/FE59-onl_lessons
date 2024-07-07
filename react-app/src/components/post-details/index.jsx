@@ -1,5 +1,4 @@
-import { useContext, useState, useEffect } from "react";
-import { MyContext } from "../hooks/context.hook";
+import { useSelector } from "react-redux";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { postsData } from "../allPosts/data.js";
 import like from "../post/img/like_icon.png";
@@ -12,10 +11,8 @@ import leftArrow from './img/left-arrow.svg';
 import rightArrow from './img/right-arrow.svg';
 import styles from "./index.scss";
 
-
-
 export const PostDetailed = () => {
-    const isDarkTheme = useContext(MyContext);
+    const isDarkTheme = useSelector(state => state.isDarkTheme);
     const navigate = useNavigate();
     const { postId } = useParams();
 
@@ -31,8 +28,8 @@ export const PostDetailed = () => {
                     <p className="detailed-post__text">{post.text}</p>
                     <div className="detailed-post__actions">
                         <div className="detailed-post__like">
-                            <img src={isDarkTheme ? likePurple : like} alt="Like" className="post__icon" />
-                            <img src={isDarkTheme ? dislikePurple : dislike} alt="Dislike" className="post__icon" />
+                            <img src={isDarkTheme ? likePurple : like} alt="Like" className={`post__icon ${post.like ? "post__icon_active" : ''}`} />
+                            <img src={isDarkTheme ? dislikePurple : dislike} alt="Dislike" className={`post__icon ${post.dislike ? "post__icon_active" : ''}`} />
                         </div>
                         <div className="detailed-post__save">
                             <button className="post__add">

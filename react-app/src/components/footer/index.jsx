@@ -1,9 +1,9 @@
-import { useContext } from "react";
+import { useSelector } from "react-redux";
 import styles from "./index.scss";
-import { MyContext } from "../hooks/context.hook";
 
 export const Footer = () => {
-    const isDarkTheme = useContext(MyContext)
+    const isDarkTheme = useSelector(state => state.isDarkTheme);
+    
     return (
         <footer className={isDarkTheme ? "footer_dark" : "footer"}>
             <div className="footer-wrapper">

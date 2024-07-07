@@ -1,6 +1,8 @@
 .posts {
   $self: &;
 
+  margin-bottom: 4%;
+
   &__title {
     margin-bottom: 20px;
     font-size: 35px;
