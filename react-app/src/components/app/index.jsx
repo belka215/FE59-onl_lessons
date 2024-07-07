@@ -33,7 +33,7 @@ export const App = () => {
                 <Routes>
                     <Route path="/" element={<MainPage />} />
                     <Route path="blog/:category" element={<AllPosts searchValue={searchValue} />} />
-                    <Route path="/blog/:postId" element={<PostDetailed />} />
+                    <Route path="/blog/:category/:postId" element={<PostDetailed />} />
                     <Route path="sign-in" element={<SignIn setIsShowModal={setIsShowModal} />} />
                     <Route path="sign-up" element={<SignUp setIsShowModal={setIsShowModal} />} />
                     <Route path="email-confirmed" element={<EmailConfirmed setIsShowModal={setIsShowModal} />} />

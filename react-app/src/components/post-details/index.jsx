@@ -21,7 +21,7 @@ export const PostDetailed = () => {
     return (
         <div className={isDarkTheme ? "detailed-post_dark" : "detailed-post"}>
             <div className="wrapper">
-                <Link to="/blog" className={`btn_underline ${isDarkTheme ? "btn_underline_dark" : ""}`}>Back to home</Link>
+                <a className={`btn_underline ${isDarkTheme ? "btn_underline_dark" : ""}`} onClick={() => navigate(-1)}>Back to home</a>
                 <div className="detailed-post__container">
                     <h1 className="detailed-post__title">{post.title}</h1>
                     <img src={post.image} alt="#" />
