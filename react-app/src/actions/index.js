@@ -14,5 +14,5 @@ export const addPostsAction = (posts) => ({ type: ADD_POSTS, payload: posts })
 export const addImgAction = (image) => ({ type: ADD_IMG, payload: image });
 export const changeLikeAction = (id) => ({ type: CHANGE_LIKE, id });
 export const changeDislikeAction = (id) => ({ type: CHANGE_DISLIKE, id });
-export const changeTabAction = (tab) => ({ type: REMOVE_IMG, tab });
+export const changeTabAction = (tab) => ({ type: CHANGE_TAB, tab });
 export const addToFavorites = (id) => ({ type: ADD_TO_FAVORITES, id});
