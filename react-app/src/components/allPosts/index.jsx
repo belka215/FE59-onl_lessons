@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { addPostsAction, changeTabAction } from "../../actions";
+import { addPostsAction, addPostsMiddlewareAction, changeTabAction } from "../../actions";
 import { Post } from "../post";
-import { postsData } from "./data";
 import { ImgModal } from "../img-modal";
 import { Spinner } from "../spinner";
 import styles from "./index.scss";
@@ -16,17 +15,11 @@ export const AllPosts = ({ searchValue }) => {
     const img = useSelector(state => state.img);
     const posts = useSelector((state) => state.posts)
     const filterValue = useSelector((state) => state.tab)
-    console.log(category)
 
     useEffect(() => {
         dispatch(changeTabAction(category));
-
-        fetch("https://studapi.teachmeskills.by/blog/posts/?limit=11")
-            .then((response) => response.json())
-            .then(({ results }) => {
-                dispatch(addPostsAction(postsData));
-            })
-            .catch((e) => console.log(e));
+        dispatch(addPostsMiddlewareAction())
+        console.log(posts)
     }, []);
 
     const handleClickTab = (category) => {
@@ -52,7 +45,9 @@ export const AllPosts = ({ searchValue }) => {
                 <div className={filterValue === "all" ? "posts__wrapper" : "posts_wrapper_flex"}>
                     {posts
                         // .reduce((result, post) => {
+                        //     if (filterValue === "all") {
 
+                        //     }
                         // }, [])
                         .filter((post) => {
                             if (filterValue === "all") {

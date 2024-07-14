@@ -1,4 +1,5 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { postsData } from "../allPosts/data.js";
 import like from "../post/img/like_icon.png";
@@ -10,13 +11,20 @@ import savePurple from "../post/img/save-p.png";
 import leftArrow from './img/left-arrow.svg';
 import rightArrow from './img/right-arrow.svg';
 import styles from "./index.scss";
+import { addDetailedPostMiddlewareAction } from "../../actions/index.js";
 
 export const PostDetailed = () => {
     const isDarkTheme = useSelector(state => state.isDarkTheme);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const { postId } = useParams();
 
-    const post = postsData.find((post) => post.id === +postId);
+    // const post = postsData.find((post) => post.id === +postId);
+    const post = useSelector(state => state.detailedPost);
+
+    useEffect(() => {
+        dispatch(addDetailedPostMiddlewareAction(postId))
+    }, []);
 
     return (
         <div className={isDarkTheme ? "detailed-post_dark" : "detailed-post"}>

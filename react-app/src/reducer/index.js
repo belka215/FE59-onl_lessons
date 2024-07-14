@@ -1,9 +1,10 @@
-import { ADD_IMG, CHANGE_THEME, REMOVE_IMG, ADD_POSTS, CHANGE_LIKE, CHANGE_DISLIKE, CHANGE_TAB, ADD_TO_FAVORITES } from "../actions";
+import { ADD_IMG, CHANGE_THEME, REMOVE_IMG, ADD_POSTS, CHANGE_LIKE, CHANGE_DISLIKE, CHANGE_TAB, ADD_TO_FAVORITES, ADD_DETAILED_POST } from "../actions";
 
 const initialState = {
     isDarkTheme: false,
     img: '',
     posts: null,
+    detailedPost: null,
     tab: 'all',
 };
 
@@ -26,7 +27,6 @@ export const reducer = (state = initialState, action) => {
                 img: '',
             }
         case ADD_POSTS:
-            console.log({ ...state, posts: action.payload })
             return {
                 ...state,
                 posts: action.payload,
@@ -51,17 +51,17 @@ export const reducer = (state = initialState, action) => {
                 tab: action.tab,
             }
         case ADD_TO_FAVORITES:
-            console.log({
-                ...state,
-                posts: state.posts.map(post => {
-                    return post.id === action.id ? { ...post, favorite: !post.favorite } : post
-                })
-            })
             return {
                 ...state,
                 posts: state.posts.map(post => {
                     return post.id === action.id ? { ...post, favorite: !post.favorite } : post
                 })
+            }
+
+        case ADD_DETAILED_POST:
+            return {
+                ...state,
+                detailedPost: action.payload,
             }
 
         default:
