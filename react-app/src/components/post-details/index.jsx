@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
+import { Spinner } from "../spinner";
 import { postsData } from "../allPosts/data.js";
 import like from "../post/img/like_icon.png";
 import dislike from "../post/img/dislike_icon.png";
@@ -25,6 +26,10 @@ export const PostDetailed = () => {
     useEffect(() => {
         dispatch(addDetailedPostMiddlewareAction(postId))
     }, []);
+
+    if (!post) {
+        return <Spinner />
+    }
 
     return (
         <div className={isDarkTheme ? "detailed-post_dark" : "detailed-post"}>

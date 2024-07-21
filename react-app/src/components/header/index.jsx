@@ -3,8 +3,13 @@ import { ThemeBtn } from "../theme-btn";
 import search from "../img/search.png";
 import panda from "../img/panda.png";
 import styles from "./index.scss";
+import { useSelector } from "react-redux";
+import person from "./img/person.png"
 
 export const Header = ({ handleInputSearch }) => {
+    const isAuth = localStorage.getItem('isAuth');
+    const login = useSelector(state => state.user.content?.username)
+    console.log(isAuth, login)
 
     return (
         <header className="header">
@@ -27,9 +32,15 @@ export const Header = ({ handleInputSearch }) => {
                             placeholder="Search"
                             onInput={handleInputSearch} />
                     </div>
-                    <Link to="/sign-in" className="header-btn">
-                        Sign In
-                    </Link>
+                    {isAuth ? (
+                        <Link to="/user-page" className="header-btn">
+                            <img src={person} className="header-btn__logo" />
+                            {login}
+                        </Link>) : (
+                        <Link to="/sign-in" className="header-btn">
+                            Sign In
+                        </Link>)}
+
                     <ThemeBtn />
                 </div>
             </div>

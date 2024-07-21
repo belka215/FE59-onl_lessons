@@ -55,6 +55,14 @@
     font-weight: bold;
     transition: 0.3s ease-out;
 
+    &__logo {
+        position: relative;
+        bottom: 5%;
+        margin-right: 5px;
+        width: 25px;
+        height: 100%;
+    }
+
     img {
         margin-left: 5px;
     }

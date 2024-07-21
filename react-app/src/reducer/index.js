@@ -1,4 +1,4 @@
-import { ADD_IMG, CHANGE_THEME, REMOVE_IMG, ADD_POSTS, CHANGE_LIKE, CHANGE_DISLIKE, CHANGE_TAB, ADD_TO_FAVORITES, ADD_DETAILED_POST } from "../actions";
+import { ADD_IMG, CHANGE_THEME, REMOVE_IMG, ADD_POSTS, CHANGE_LIKE, CHANGE_DISLIKE, CHANGE_TAB, ADD_TO_FAVORITES, ADD_DETAILED_POST, POST_USER_DATA, RECEIVED_USER_DATA } from "../actions";
 
 const initialState = {
     isDarkTheme: false,
@@ -6,6 +6,11 @@ const initialState = {
     posts: null,
     detailedPost: null,
     tab: 'all',
+    user: {
+        content: {},
+        loading: false,
+        errors: {},
+    }
 };
 
 
@@ -62,6 +67,23 @@ export const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 detailedPost: action.payload,
+            }
+        case POST_USER_DATA:
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    loading: true,
+                }
+            }
+        case RECEIVED_USER_DATA:
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    content: action.user,
+                    loading: false,
+                }
             }
 
         default:

@@ -12,6 +12,8 @@ import { EmailConfirmed } from "../emailConfirmed";
 import { Footer } from "../footer";
 import { NotFound } from "../not-found/index.jsx";
 import styles from "./index.scss";
+import { EmailActivation } from "../emailActivation/index.jsx";
+import { UserPage } from "../userPage/index.jsx";
 
 
 export const App = () => {
@@ -37,6 +39,8 @@ export const App = () => {
                     <Route path="sign-in" element={<SignIn setIsShowModal={setIsShowModal} />} />
                     <Route path="sign-up" element={<SignUp setIsShowModal={setIsShowModal} />} />
                     <Route path="email-confirmed" element={<EmailConfirmed setIsShowModal={setIsShowModal} />} />
+                    <Route path="/activate/:uid/:token" element={<EmailActivation setIsShowModal={setIsShowModal}/>} />
+                    <Route path="user-page" element={<UserPage setIsShowModal={setIsShowModal} />} />
                     <Route path="*" element={<NotFound />} />
                 </Routes>
                 <Footer />

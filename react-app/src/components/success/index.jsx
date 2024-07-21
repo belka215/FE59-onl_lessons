@@ -14,10 +14,9 @@ export const Success = ({ setPage, setIsShowModal }) => {
                     <div className="success__content">
                         <p className="success__text">Email confirmed.</p>
                         <p className="success__text">You are now signed in!</p>
-                        <Link to="/blog">
+                        <Link to="/blog/all">
                             <Button setIsShowModal={setIsShowModal}>Go to Home</Button>
                         </Link>
-
                     </div>
                 </div>
             </div>

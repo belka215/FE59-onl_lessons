@@ -1,15 +1,42 @@
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { Button } from "../button";
+import { useState } from "react";
+import { signUpMiddlewareAction } from "../../actions";
 import styles from "./index.scss";
 
 export const SignUp = ({ setIsShowModal }) => {
     const isDarkTheme = useSelector(state => state.isDarkTheme);
-    
+    const user = useSelector((state) => state.user);
+    const [values, setValues] = useState({});
+    const [error, setError] = useState(null);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const handleChangeText = (event, field) => {
+        setValues((prevState) => ({ ...prevState, [field]: event.target.value }))
+    }
+
+    console.log(user)
+
+    const handleSignUp = () => {
+        if (values.password?.length >= 8 && values.login && values.email) {
+            if (values.password === values.confirmPassword) {
+                dispatch(signUpMiddlewareAction(values));
+                navigate("/email-confirmed");
+            } else {
+                setError("Passwords don't match!")
+            }
+        } else {
+            setError("Password must be at least 8 symbols")
+        }
+
+    }
+
     return (
         <section className={isDarkTheme ? "sign-up_dark" : "sign-up"}>
             <div className="wrapper">
-                <Link to="/blog" className={`btn_underline ${isDarkTheme ? "btn_underline_dark" : ""}`}>Back to home</Link>
+                <Link to="/blog/all" className={`btn_underline ${isDarkTheme ? "btn_underline_dark" : ""}`}>Back to home</Link>
                 <h2 className="sign-up__title">Sign Up</h2>
                 <div className="sign-up__container">
                     <div className="sign-up__form">
@@ -19,7 +46,7 @@ export const SignUp = ({ setIsShowModal }) => {
                             placeholder="Enter login"
                             name="login"
                             className={`input ${isDarkTheme ? "input_dark" : ""}`}
-                            // onChange={handleChangeEmail}
+                            onChange={(event) => handleChangeText(event, 'login')}
                             required
                         />
                         <label htmlFor="email" className={`label ${isDarkTheme ? "label_dark" : ""}`}><b>Email</b></label>
@@ -28,7 +55,7 @@ export const SignUp = ({ setIsShowModal }) => {
                             placeholder="Enter Email"
                             name="email"
                             className={`input ${isDarkTheme ? "input_dark" : ""}`}
-                            // onChange={handleChangeEmail}
+                            onChange={(event) => handleChangeText(event, 'email')}
                             required
                         />
                         <label htmlFor="psw" className={`label ${isDarkTheme ? "label_dark" : ""}`}><b>Password</b></label>
@@ -36,8 +63,8 @@ export const SignUp = ({ setIsShowModal }) => {
                             type="password"
                             placeholder="Enter Password"
                             name="psw"
-                            className={`input ${isDarkTheme ? "input_dark" : ""}`}
-                            // onChange={handleChangePass}
+                            className={`input ${isDarkTheme ? "input_dark" : ""} ${error ? 'error' : ''}`}
+                            onChange={(event) => handleChangeText(event, 'password')}
                             required
                         />
                         <label htmlFor="psw" className={`label ${isDarkTheme ? "label_dark" : ""}`}><b>Confirm Password</b></label>
@@ -45,11 +72,12 @@ export const SignUp = ({ setIsShowModal }) => {
                             type="password"
                             placeholder="Confirm Password"
                             name="psw"
-                            className={`input ${isDarkTheme ? "input_dark" : ""}`}
-                            // onChange={handleChangePass}
+                            className={`input ${isDarkTheme ? "input_dark" : ""} ${error === "Passwords don't match!" ? 'error' : ''}`}
+                            onChange={(event) => handleChangeText(event, 'confirmPassword')}
                             required
                         />
-                        <Link to="/email-confirmed"><Button>Sign Up</Button></Link>
+                        {error}
+                        <div onClick={handleSignUp}><Button>Sign Up</Button></div>
                         <div className="sign-up-container">
                             <p className={isDarkTheme ? "text_dark" : ''}>Already have an account?
                                 <Link to="/sign-in" className={`btn_underline ${isDarkTheme ? "btn_underline_dark" : ""}`}> Sign in</Link>.

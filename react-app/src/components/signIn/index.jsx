@@ -13,13 +13,13 @@ export const SignIn = ({ setIsShowModal }) => {
     }
 
     const handleChangePass = (event) => {
-        setValues((prevState) => ({ ...prevState, pass: event.target.value }))
+        setValues((prevState) => ({ ...prevState, password: event.target.value }))
     }
 
     return (
         <section className={isDarkTheme ? "sign-in_dark" : "sign-in"}>
             <div className="wrapper">
-                <Link to="/blog" className={`btn_underline ${isDarkTheme ? "btn_underline_dark" : ""}`}>Back to home</Link>
+                <Link to="/blog/all" className={`btn_underline ${isDarkTheme ? "btn_underline_dark" : ""}`}>Back to home</Link>
                 <h2 className="sign-in__title">Sign In</h2>
                 <div className="form-container">
                     <div className="sign-in__form">
