@@ -6,10 +6,9 @@ import styles from "./index.scss";
 import { useSelector } from "react-redux";
 import person from "./img/person.png"
 
-export const Header = ({ handleInputSearch }) => {
+export const Header = ({ handleInputSearch, searchValue }) => {
     const isAuth = localStorage.getItem('isAuth');
     const login = useSelector(state => state.user.content?.username)
-    console.log(isAuth, login)
 
     return (
         <header className="header">
@@ -30,7 +29,8 @@ export const Header = ({ handleInputSearch }) => {
                             type="text"
                             className="header__search__input"
                             placeholder="Search"
-                            onInput={handleInputSearch} />
+                            onInput={handleInputSearch}
+                            value={searchValue} />
                     </div>
                     {isAuth ? (
                         <Link to="/user-page" className="header-btn">

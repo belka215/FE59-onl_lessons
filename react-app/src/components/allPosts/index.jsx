@@ -5,7 +5,11 @@ import { addPostsAction, addPostsMiddlewareAction, changeTabAction } from "../..
 import { Post } from "../post";
 import { ImgModal } from "../img-modal";
 import { Spinner } from "../spinner";
+import { NoSearchResult } from "../noSearchResult";
 import styles from "./index.scss";
+import { Pagination } from "../pagination";
+
+export const LIMIT = 12;
 
 export const AllPosts = ({ searchValue }) => {
     const { category } = useParams();
@@ -14,11 +18,13 @@ export const AllPosts = ({ searchValue }) => {
     const isDarkTheme = useSelector(state => state.isDarkTheme);
     const img = useSelector(state => state.img);
     const posts = useSelector((state) => state.posts)
-    const filterValue = useSelector((state) => state.tab)
+    const filterValue = useSelector((state) => state.tab);
+    const [order, setOrder] = useState('title');
+    const [page, setPage] = useState(1);
 
     useEffect(() => {
         dispatch(changeTabAction(category));
-        dispatch(addPostsMiddlewareAction())
+        dispatch(addPostsMiddlewareAction(searchValue, order, LIMIT, page))
         console.log(posts)
     }, []);
 
@@ -28,6 +34,17 @@ export const AllPosts = ({ searchValue }) => {
             navigate(`/blog/${category}`)
         }
     }
+
+    const handleLoadMore = () => {
+        dispatch(addPostsMiddlewareAction(searchValue, order, LIMIT, page + 1))
+        setPage((prevState) => prevState + 1);
+    };
+
+    const handleChangePage = (newPage) => {
+        dispatch(addPostsMiddlewareAction(searchValue, order, LIMIT, newPage))
+
+        setPage(newPage);
+    };
 
     if (!posts) {
         return <Spinner />
@@ -41,49 +58,36 @@ export const AllPosts = ({ searchValue }) => {
                     <button className="btns__item" onClick={handleClickTab("all")}>All</button>
                     <button className="btns__item" onClick={handleClickTab("favorites")}>My Favorites</button>
                     <button className="btns__item" onClick={handleClickTab("popular")}>Popular</button>
+                    <select className="btns__item" onClick={(event) => setOrder(event.target.value)}>
+                        <option value="title">Title</option>
+                        <option value="author">Author</option>
+                        <option value="date">Date</option>
+                    </select>
                 </div>
                 <div className={filterValue === "all" ? "posts__wrapper" : "posts_wrapper_flex"}>
                     {posts
-                        // .reduce((result, post) => {
-                        //     if (filterValue === "all") {
-
-                        //     }
-                        // }, [])
-                        .filter((post) => {
-                            if (filterValue === "all") {
-                                return post;
-                            } else if (filterValue === "favorites") {
-                                return post.favorite;
-                            } else if (filterValue === "popular") {
-                                return post.popular;
-                            }
-                        })
-                        .filter((post) => {
-                            if (searchValue) {
-                                return post.title.toLowerCase().includes(searchValue.toLowerCase())
-                            } else {
-                                return post
-                            }
-                        })
                         .map((item, index) => {
-                            let size = "large";
-
-                            if (index >= 1 && index <= 4) {
-                                size = "medium";
-                            } else if (index > 4) {
-                                size = "small";
-                            }
-
                             return <Post
                                 post={item}
                                 index={index}
                                 key={index}
-                                size={size}
+                                size={index <= 5 ? "medium" : "small"}
                                 filterValue={filterValue}
                             />;
                         })
                     }
+                    {/* {!posts.content?.length && !posts.loading && <NoSearchResult />} */}
                 </div>
+                <Pagination count={posts.count}
+                    limit={LIMIT}
+                    page={page}
+                    handleChangePage={handleChangePage}
+                />
+                {page * (LIMIT + 1) <= posts.count && (
+                    <div onClick={handleLoadMore}>
+                        <button >Load more</button>
+                    </div>
+                )}
             </div>
             {img && <ImgModal img={img} />}
         </section>

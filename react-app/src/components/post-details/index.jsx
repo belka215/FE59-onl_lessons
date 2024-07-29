@@ -38,7 +38,7 @@ export const PostDetailed = () => {
                 <div className="detailed-post__container">
                     <h1 className="detailed-post__title">{post.title}</h1>
                     <img src={post.image} alt="#" />
-                    <p className="detailed-post__text">{post.text}</p>
+                    <p className="detailed-post__text">{post.description}</p>
                     <div className="detailed-post__actions">
                         <div className="detailed-post__like">
                             <img src={isDarkTheme ? likePurple : like} alt="Like" className={`post__icon ${post.like ? "post__icon_active" : ''}`} />

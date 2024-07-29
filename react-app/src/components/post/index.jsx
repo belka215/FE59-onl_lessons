@@ -37,7 +37,7 @@ export const Post = ({ post, index, size, filterValue }) => {
         <div className="post__info">
           <p className="post__date">{post.date}</p>
           <Link to={`${post.id}`} className="post__title">{post.title}</Link>
-          <p className="post__text">{post.text}</p>
+          <p className="post__text">{post.description}</p>
         </div>
         <div className="post__img" onClick={handleClickImg}>
           <img src={post.image} alt="" id={`img-${post.id}`} />

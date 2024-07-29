@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Header } from "../header";
 import { MainPage } from "../main-page/index.jsx";
@@ -14,23 +14,25 @@ import { NotFound } from "../not-found/index.jsx";
 import styles from "./index.scss";
 import { EmailActivation } from "../emailActivation/index.jsx";
 import { UserPage } from "../userPage/index.jsx";
+import { addPostsMiddlewareAction } from "../../actions/index.js";
 
 
 export const App = () => {
     const [isShowModal, setIsShowModal] = useState(false);
     const [searchValue, setSearchValue] = useState('');
+    const dispatch = useDispatch();
 
     const isDarkTheme = useSelector(state => state.isDarkTheme);
 
     function handleInputSearch(event) {
         setSearchValue(event.target.value)
-        console.log(searchValue)
+        dispatch(addPostsMiddlewareAction(searchValue));
     }
 
     return (
         <BrowserRouter>
             {/* <MyContext.Provider value={isDarkTheme}> */}
-            <Header handleInputSearch={handleInputSearch} />
+            <Header handleInputSearch={handleInputSearch} searchValue={searchValue} />
             <main className={isDarkTheme ? "dark-theme" : ''}>
                 <Routes>
                     <Route path="/" element={<MainPage />} />

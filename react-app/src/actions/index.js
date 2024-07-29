@@ -1,6 +1,7 @@
 import { postsData } from "../components/allPosts/data";
 import { fetchToken } from "../api/auth";
 import { fetchUserInfo } from "../api/user";
+import { LIMIT } from "../components/allPosts";
 
 export const CHANGE_THEME = 'CHANGE_THEME';
 export const ADD_IMG = 'ADD_IMG';
@@ -27,9 +28,12 @@ export const changeTabAction = (tab) => ({ type: CHANGE_TAB, tab });
 export const addToFavorites = (id) => ({ type: ADD_TO_FAVORITES, id });
 export const addUserDataAction = (user) => ({ type: RECEIVED_USER_DATA, user });
 
-export const addPostsMiddlewareAction = () => {
+export const addPostsMiddlewareAction = (searchValue, order, limit, page) => {
     return (dispatch) => {
-        const URL = 'https://studapi.teachmeskills.by/blog/posts/?limit=11&offset=2';
+        const offset = (page - 1) * limit;
+        const URL = `https://studapi.teachmeskills.by/blog/posts/?limit=${limit}&offset=${offset}&${searchValue ? `&search=${searchValue}` : ""
+            }&ordering=${order}`;
+
         fetch(URL)
             .then((response) => {
                 return response.json()
