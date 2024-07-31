@@ -1,31 +1,32 @@
 .pagination {
-    margin: 25px;
-  
-    &__item {
-      width: 30px;
-      height: 30px;
-      border: none;
-      border-radius: 50%;
-      margin-right: 5px;
-      cursor: pointer;
-      font-size: 15px;
-      transition: background-color 0.2s linear;
-  
-      &_active {
-        background-color: rgb(241, 201, 149);
-      }
-  
-      &:hover {
-        background-color: antiquewhite;
-      }
-  
-      &:last-child {
-        margin-right: 0;
-      }
+  width: 30%;
+  margin: 25px auto;
+
+  &__item {
+    width: 30px;
+    height: 30px;
+    border: none;
+    border-radius: 50%;
+    margin-right: 5px;
+    cursor: pointer;
+    font-size: 15px;
+    transition: background-color 0.2s linear;
+
+    &_active {
+      background-color: rgb(231, 194, 252);
     }
-  
-    &__dots {
-      margin-right: 5px;
-      margin-left: 5px;
+
+    &:hover {
+      background-color: rgb(225, 194, 246);
+    }
+
+    &:last-child {
+      margin-right: 0;
     }
   }
+
+  &__dots {
+    margin-right: 5px;
+    margin-left: 5px;
+  }
+}

@@ -15,6 +15,7 @@ import styles from "./index.scss";
 import { EmailActivation } from "../emailActivation/index.jsx";
 import { UserPage } from "../userPage/index.jsx";
 import { addPostsMiddlewareAction } from "../../actions/index.js";
+import { CreatePost } from "../createPost/index.jsx";
 
 
 export const App = () => {
@@ -43,6 +44,7 @@ export const App = () => {
                     <Route path="email-confirmed" element={<EmailConfirmed setIsShowModal={setIsShowModal} />} />
                     <Route path="/activate/:uid/:token" element={<EmailActivation setIsShowModal={setIsShowModal}/>} />
                     <Route path="user-page" element={<UserPage setIsShowModal={setIsShowModal} />} />
+                    <Route path="create-post" element={<CreatePost setIsShowModal={setIsShowModal}/>} />
                     <Route path="*" element={<NotFound />} />
                 </Routes>
                 <Footer />

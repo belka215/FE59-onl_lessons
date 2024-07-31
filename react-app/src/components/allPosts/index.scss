@@ -34,6 +34,9 @@
 
 .btns {
   $self: &;
+
+  display: flex;
+  justify-content: space-between;
   border-bottom: solid 2px rgb(190, 190, 190);
   margin-bottom: 20px;
 
@@ -66,4 +69,10 @@
       color: white;
     }
   }
+}
+
+.create-container {
+  display: flex;
+  padding: 0 10px;
+  border: 2px solid rgb(83, 36, 160);
 }

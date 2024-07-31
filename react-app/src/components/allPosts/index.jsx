@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
-import { addPostsAction, addPostsMiddlewareAction, changeTabAction } from "../../actions";
+import { useNavigate, useParams, Link } from "react-router-dom";
+import { addPostsAction, addPostsMiddlewareAction, changeOrderAction, changeTabAction } from "../../actions";
 import { Post } from "../post";
 import { ImgModal } from "../img-modal";
 import { Spinner } from "../spinner";
@@ -17,14 +17,15 @@ export const AllPosts = ({ searchValue }) => {
     const dispatch = useDispatch();
     const isDarkTheme = useSelector(state => state.isDarkTheme);
     const img = useSelector(state => state.img);
-    const posts = useSelector((state) => state.posts)
+    const posts = useSelector((state) => state.posts.content);
+    const count = useSelector((state) => state.posts.count);
     const filterValue = useSelector((state) => state.tab);
-    const [order, setOrder] = useState('title');
+    const order = useSelector((state) => state.order);
     const [page, setPage] = useState(1);
 
     useEffect(() => {
         dispatch(changeTabAction(category));
-        dispatch(addPostsMiddlewareAction(searchValue, order, LIMIT, page))
+        dispatch(addPostsMiddlewareAction('', order, LIMIT, page))
         console.log(posts)
     }, []);
 
@@ -35,16 +36,16 @@ export const AllPosts = ({ searchValue }) => {
         }
     }
 
-    const handleLoadMore = () => {
-        dispatch(addPostsMiddlewareAction(searchValue, order, LIMIT, page + 1))
-        setPage((prevState) => prevState + 1);
-    };
-
     const handleChangePage = (newPage) => {
         dispatch(addPostsMiddlewareAction(searchValue, order, LIMIT, newPage))
-
         setPage(newPage);
     };
+
+    const handleOrderChange = (order) => {
+        console.log(order);
+        dispatch(changeOrderAction(order));
+        dispatch(addPostsMiddlewareAction(searchValue, order, LIMIT, page))
+    }
 
     if (!posts) {
         return <Spinner />
@@ -55,14 +56,20 @@ export const AllPosts = ({ searchValue }) => {
             <div className="wrapper">
                 <h1 className="posts__title">{searchValue ? `Search results for "${searchValue}"` : "Blog"}</h1>
                 <div className={`btns ${isDarkTheme ? "btns_dark" : ''}`}>
-                    <button className="btns__item" onClick={handleClickTab("all")}>All</button>
-                    <button className="btns__item" onClick={handleClickTab("favorites")}>My Favorites</button>
-                    <button className="btns__item" onClick={handleClickTab("popular")}>Popular</button>
-                    <select className="btns__item" onClick={(event) => setOrder(event.target.value)}>
-                        <option value="title">Title</option>
-                        <option value="author">Author</option>
-                        <option value="date">Date</option>
-                    </select>
+                    <div>
+                        <button className="btns__item" onClick={handleClickTab("all")}>All</button>
+                        <button className="btns__item" onClick={handleClickTab("favorites")}>My Favorites</button>
+                        <button className="btns__item" onClick={handleClickTab("popular")}>Popular</button>
+                        <select className="btns__item" onClick={(event) => handleOrderChange(event.target.value)}>
+                            <option value="title">Title</option>
+                            <option value="author">Author</option>
+                            <option value="date">Date</option>
+                        </select>
+                    </div>
+                    <Link to="/create-post" className="create-container">
+                        <button className="create-container__btn">Create Post</button>
+                    </Link>
+
                 </div>
                 <div className={filterValue === "all" ? "posts__wrapper" : "posts_wrapper_flex"}>
                     {posts
@@ -76,18 +83,13 @@ export const AllPosts = ({ searchValue }) => {
                             />;
                         })
                     }
-                    {/* {!posts.content?.length && !posts.loading && <NoSearchResult />} */}
+                    {!posts.content?.length && <NoSearchResult />}
                 </div>
-                <Pagination count={posts.count}
+                <Pagination count={count}
                     limit={LIMIT}
                     page={page}
                     handleChangePage={handleChangePage}
                 />
-                {page * (LIMIT + 1) <= posts.count && (
-                    <div onClick={handleLoadMore}>
-                        <button >Load more</button>
-                    </div>
-                )}
             </div>
             {img && <ImgModal img={img} />}
         </section>

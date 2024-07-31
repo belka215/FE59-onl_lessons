@@ -39,8 +39,8 @@ export const Header = ({ handleInputSearch, searchValue }) => {
                         </Link>) : (
                         <Link to="/sign-in" className="header-btn">
                             Sign In
-                        </Link>)}
-
+                        </Link>)
+                    }
                     <ThemeBtn />
                 </div>
             </div>
