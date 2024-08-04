@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { Button } from "../button";
 import styles from "./index.scss";
 
-export const Success = ({ setPage, setIsShowModal }) => {
+export const Success = ({ setIsShowModal }) => {
     const isDarkTheme = useSelector(state => state.isDarkTheme);
 
     return (
@@ -23,7 +23,3 @@ export const Success = ({ setPage, setIsShowModal }) => {
         </section>
     )
 }
-
-
-
-
